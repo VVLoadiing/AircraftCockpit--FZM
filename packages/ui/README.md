@@ -117,7 +117,9 @@ withAlpha(palette.value.primary, 0.2) // 'rgba(8,145,178,0.2)'
 
 > ECharts 为**可选 peerDependency**，使用 `BaseChart` / 预设前需自行安装 `echarts`。
 
-## 组件清单
+## 组件清单（29 个）
+
+### 基础容器
 
 | 组件 | 用途 | 对应文档章节 |
 |------|------|--------------|
@@ -125,19 +127,51 @@ withAlpha(palette.value.primary, 0.2) // 'rgba(8,145,178,0.2)'
 | `GlassPanel` | 切角玻璃浮层（场景叠加） | 7.3 |
 | `FzGlass` | 统一玻璃浮窗（随主题深浅反转） | 7.4 |
 | `FzGlassTitle` / `FzGlassRow` / `FzGlassClose` | 浮窗配套标题/数据行/关闭按钮 | 7.5 |
-| `KpiItem` | KPI 大数字 | 7.6 |
-| `StatusDot` | 状态点（脉冲/闪烁） | 7.7 |
-| `CountBadge` | 计数徽章 | 7.8 |
-| `LevelBadge` | 告警等级徽章 | 7.8 |
-| `ProgressBar` | 切角流光进度条 | 7.8 |
-| `HudButton` | HUD 操作按钮 | 7.8 |
-| `HudChip` | HUD 提示标签 | 7.8 |
-| `MetricBox` | Mini 统计小方块 | 7.8 |
-| `DataRow` | 数据键值行 | 7.8 |
-| `TechRow` | 科技列表项 | 7.8 |
-| `HudFrame` | 全屏 HUD 机甲边框 + 四角角标 | 8.1 |
-| `Sidebar` | 透明浮层侧栏（错峰入场） | 8.3 |
-| `BaseChart` | ECharts 自适应封装（含尺寸守卫） | 10.5 |
+
+### 数据展示
+
+| 组件 | 用途 |
+|------|------|
+| `KpiItem` | KPI 大数字（7.6） |
+| `CountUp` | 数字滚动动画 |
+| `MetricBox` | Mini 统计小方块（7.8） |
+| `DataRow` | 数据键值行（7.8） |
+| `TechRow` | 科技列表项（7.8） |
+| `TechTag` | 科技标签（可关闭） |
+| `TechAvatar` | 头像 / 设备图标（带状态点） |
+| `TechDivider` | 分割线（带文字） |
+| `BaseChart` | ECharts 自适应封装（10.5，含尺寸守卫） |
+
+### 反馈与标识
+
+| 组件 | 用途 |
+|------|------|
+| `StatusDot` | 状态点（脉冲/闪烁，7.7） |
+| `CountBadge` | 计数徽章（7.8） |
+| `LevelBadge` | 告警等级徽章（7.8） |
+| `ProgressBar` | 切角流光进度条（7.8） |
+| `HudButton` | HUD 操作按钮（7.8） |
+| `HudChip` | HUD 提示标签（7.8） |
+| `TechEmpty` | 空状态占位 |
+| `LoadingSpinner` | 加载中（机甲风双环） |
+
+### 输入与导航
+
+| 组件 | 用途 |
+|------|------|
+| `TechInput` | 科技风输入框（前缀/后缀/可清空） |
+| `TechSelect` | 切角下拉选择 |
+| `TechSwitch` | 开关 |
+| `IconToggle` | 图标按钮组（视图模式切换） |
+| `TechTabs` | 标签页（激活指示条） |
+| `Segmented` | 分段控制器 |
+
+### 布局
+
+| 组件 | 用途 |
+|------|------|
+| `HudFrame` | 全屏 HUD 机甲边框 + 四角角标（8.1） |
+| `Sidebar` | 透明浮层侧栏（错峰入场，8.3） |
 
 ## 导出的组合式函数、工具与图表预设
 

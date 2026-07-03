@@ -48,9 +48,13 @@ export default defineConfig({
           text: '数据展示',
           items: [
             { text: 'KpiItem KPI 大数字', link: '/components/kpi-item' },
+            { text: 'CountUp 数字滚动', link: '/components/count-up' },
             { text: 'MetricBox 统计方块', link: '/components/metric-box' },
             { text: 'DataRow 数据行', link: '/components/data-row' },
             { text: 'TechRow 科技列表项', link: '/components/tech-row' },
+            { text: 'TechTag 科技标签', link: '/components/tech-tag' },
+            { text: 'TechAvatar 头像', link: '/components/tech-avatar' },
+            { text: 'TechDivider 分割线', link: '/components/tech-divider' },
             { text: 'BaseChart 图表封装', link: '/components/base-chart' },
           ],
         },
@@ -63,6 +67,19 @@ export default defineConfig({
             { text: 'ProgressBar 进度条', link: '/components/progress-bar' },
             { text: 'HudButton 按钮', link: '/components/hud-button' },
             { text: 'HudChip 提示标签', link: '/components/hud-chip' },
+            { text: 'TechEmpty 空状态', link: '/components/tech-empty' },
+            { text: 'LoadingSpinner 加载中', link: '/components/loading-spinner' },
+          ],
+        },
+        {
+          text: '输入与导航',
+          items: [
+            { text: 'TechInput 输入框', link: '/components/tech-input' },
+            { text: 'TechSelect 下拉选择', link: '/components/tech-select' },
+            { text: 'TechSwitch 开关', link: '/components/tech-switch' },
+            { text: 'IconToggle 图标按钮组', link: '/components/icon-toggle' },
+            { text: 'TechTabs 标签页', link: '/components/tech-tabs' },
+            { text: 'Segmented 分段控件', link: '/components/segmented' },
           ],
         },
         {

@@ -29,6 +29,21 @@ import TechRow from './components/TechRow'
 import HudFrame from './components/HudFrame'
 import Sidebar from './components/Sidebar'
 import BaseChart from './components/BaseChart'
+// 输入交互
+import TechInput from './components/TechInput'
+import TechSelect from './components/TechSelect'
+import TechSwitch from './components/TechSwitch'
+import IconToggle from './components/IconToggle'
+// 导航
+import TechTabs from './components/TechTabs'
+import Segmented from './components/Segmented'
+// 反馈展示
+import TechTag from './components/TechTag'
+import TechEmpty from './components/TechEmpty'
+import LoadingSpinner from './components/LoadingSpinner'
+import CountUp from './components/CountUp'
+import TechDivider from './components/TechDivider'
+import TechAvatar from './components/TechAvatar'
 
 // —— Composables ——
 export { useUiTheme, setUiStyle, initUiStyle, uiStyle, currentUiStyle } from './composables/useUiTheme'
@@ -74,6 +89,21 @@ export {
   HudFrame,
   Sidebar,
   BaseChart,
+  // 输入交互
+  TechInput,
+  TechSelect,
+  TechSwitch,
+  IconToggle,
+  // 导航
+  TechTabs,
+  Segmented,
+  // 反馈展示
+  TechTag,
+  TechEmpty,
+  LoadingSpinner,
+  CountUp,
+  TechDivider,
+  TechAvatar,
 }
 
 /** 全部组件清单（用于全量注册） */
@@ -97,6 +127,21 @@ const components = {
   HudFrame,
   Sidebar,
   BaseChart,
+  // 输入交互
+  TechInput,
+  TechSelect,
+  TechSwitch,
+  IconToggle,
+  // 导航
+  TechTabs,
+  Segmented,
+  // 反馈展示
+  TechTag,
+  TechEmpty,
+  LoadingSpinner,
+  CountUp,
+  TechDivider,
+  TechAvatar,
 }
 
 /** Vue 插件：app.use(FzmUI) 全量注册 */
