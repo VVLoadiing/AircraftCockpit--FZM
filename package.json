@@ -1,0 +1,25 @@
+{
+  "name": "fzm-tech-hud-template",
+  "version": "1.0.0",
+  "private": true,
+  "description": "曜蓝机甲 Tech HUD — 面向大屏数字孪生 / 工业监控 / 智慧中台的 Vue 3 项目模板（含可发布 npm 的 UI 组件库）",
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --filter playground dev",
+    "dev:docs": "pnpm --filter docs dev",
+    "build": "pnpm --filter @fzm/ui build && pnpm --filter playground build",
+    "build:ui": "pnpm --filter @fzm/ui build",
+    "build:docs": "pnpm --filter docs build",
+    "preview": "pnpm --filter playground preview",
+    "clean": "pnpm -r exec rimraf dist node_modules"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@11.9.0"
+}

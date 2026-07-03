@@ -1,0 +1,419 @@
+/**
+ * themes.css — 10 套主题预设（8 深色 + 2 白色）
+ * 来源：UI设计系统规范.md 第 5 章
+ *
+ * 触发方式：<html data-ui-style="id">，JS 改属性即整套换肤。
+ * 每套只覆盖需要变化的变量（主色 / 底色 / 文字次色 / 图表色）。
+ * 新增主题规则见第 5.2 节。
+ */
+
+/* ============ 1. 曜蓝·通透（默认，已在 tokens.css 定义，此处保留钩子） ============ */
+/* :root[data-ui-style='transparent'] 不需要额外覆盖，使用令牌默认值 */
+
+/* ============ 2. 曜蓝·清晰（高对比实底 · 数据密集） ============ */
+:root[data-ui-style='clear'] {
+  --primary: #4ea8c8;
+  --primary-rgb: 78, 168, 200;
+  --primary-dark: #2f7a96;
+  --primary-light: #7cc0d6;
+  --primary-lighter: #a8d6e4;
+  --accent: #3f96b5;
+  --accent-rgb: 63, 150, 181;
+  --accent-light: #5fb0c8;
+
+  --bg-body: #040608;
+  --bg-card: linear-gradient(168deg, rgba(4, 24, 44, 0.94), rgba(4, 24, 44, 0.96) 60%, rgba(4, 24, 44, 0.98));
+  --bg-card-strong: rgba(3, 18, 36, 0.99);
+  --bg-elevated: rgba(5, 22, 40, 0.99);
+
+  --text-secondary: #b6d6e8;
+
+  --chart-axis: rgba(190, 230, 255, 0.6);
+  --chart-split: rgba(190, 230, 255, 0.2);
+  /* 鲜艳版（主色取更深的青蓝） */
+  --chart-series: #06b6d4, #34d399, #fbbf24, #f87171, #0ea5e9, #a3e635, #fb923c, #e879f9;
+}
+
+/* ============ 3. 青空（现代 SaaS · Linear 风） ============ */
+:root[data-ui-style='green'] {
+  --primary: #22d3ee;
+  --primary-rgb: 34, 211, 238;
+  --primary-dark: #0e7490;
+  --primary-light: #67e8f9;
+  --primary-lighter: #a5f3fc;
+  --accent: #06b6d4;
+  --accent-rgb: 6, 182, 212;
+  --accent-light: #22d3ee;
+
+  --success: #34d399;
+  --success-rgb: 52, 211, 153;
+  --warning: #fbbf24;
+  --warning-rgb: 251, 191, 36;
+  --danger: #f87171;
+  --danger-rgb: 248, 113, 113;
+  --status-running-rgb: 52, 211, 153;
+
+  --bg-body: #04080a;
+  --bg-card: linear-gradient(168deg, rgba(8, 22, 30, 0.86), rgba(8, 22, 30, 0.92) 60%, rgba(8, 22, 30, 0.96));
+  --bg-card-strong: rgba(6, 18, 26, 0.98);
+  --bg-elevated: rgba(10, 24, 32, 0.98);
+
+  --text-secondary: #bae6f0;
+
+  --chart-axis: rgba(186, 230, 240, 0.55);
+  --chart-label: #ffffff;
+  --chart-legend: #c8edf2;
+  --chart-split: rgba(186, 230, 240, 0.18);
+  --chart-tooltip-bg: rgba(4, 14, 20, 0.92);
+  --chart-tooltip-text: #e8f8fc;
+  --chart-series: #22d3ee, #34d399, #fbbf24, #f87171, #67e8f9, #a3e635, #fb923c, #e879f9;
+}
+
+/* ============ 4. 翠林（能源 / 可持续 / ESG） ============ */
+:root[data-ui-style='amber'] {
+  --primary: #34d399;
+  --primary-rgb: 52, 211, 153;
+  --primary-dark: #047857;
+  --primary-light: #6ee7b7;
+  --primary-lighter: #a7f3d0;
+  --accent: #10b981;
+  --accent-rgb: 16, 185, 129;
+  --accent-light: #34d399;
+
+  --success: #34d399;
+  --success-rgb: 52, 211, 153;
+  --warning: #fbbf24;
+  --warning-rgb: 251, 191, 36;
+  --danger: #f87171;
+  --danger-rgb: 248, 113, 113;
+  --status-running-rgb: 52, 211, 153;
+
+  --bg-body: #04100a;
+  --bg-card: linear-gradient(168deg, rgba(6, 28, 20, 0.86), rgba(6, 28, 20, 0.92) 60%, rgba(6, 28, 20, 0.96));
+  --bg-card-strong: rgba(4, 22, 16, 0.98);
+  --bg-elevated: rgba(8, 30, 22, 0.98);
+
+  --text-secondary: #b6efd6;
+
+  --chart-axis: rgba(186, 240, 220, 0.55);
+  --chart-label: #ffffff;
+  --chart-legend: #c8f2dc;
+  --chart-split: rgba(186, 240, 220, 0.18);
+  --chart-tooltip-bg: rgba(4, 18, 12, 0.92);
+  --chart-tooltip-text: #e8fcf0;
+  --chart-series: #34d399, #22d3ee, #fbbf24, #f87171, #6ee7b7, #a3e635, #fcd34d, #fca5a5;
+}
+
+/* ============ 5. 星云（AI / 智慧中台） ============ */
+:root[data-ui-style='violet'] {
+  --primary: #a78bfa;
+  --primary-rgb: 167, 139, 250;
+  --primary-dark: #6d28d9;
+  --primary-light: #c4b5fd;
+  --primary-lighter: #ddd6fe;
+  --accent: #8b5cf6;
+  --accent-rgb: 139, 92, 246;
+  --accent-light: #a78bfa;
+
+  --success: #34d399;
+  --success-rgb: 52, 211, 153;
+  --warning: #fbbf24;
+  --warning-rgb: 251, 191, 36;
+  --danger: #f87171;
+  --danger-rgb: 248, 113, 113;
+  --status-running-rgb: 52, 211, 153;
+
+  --bg-body: #060410;
+  --bg-card: linear-gradient(168deg, rgba(20, 12, 36, 0.86), rgba(20, 12, 36, 0.92) 60%, rgba(20, 12, 36, 0.96));
+  --bg-card-strong: rgba(16, 8, 30, 0.98);
+  --bg-elevated: rgba(24, 12, 40, 0.98);
+
+  --text-secondary: #d6ccf2;
+
+  --chart-axis: rgba(224, 214, 252, 0.55);
+  --chart-label: #ffffff;
+  --chart-legend: #dcd4f4;
+  --chart-split: rgba(224, 214, 252, 0.18);
+  --chart-tooltip-bg: rgba(12, 6, 24, 0.92);
+  --chart-tooltip-text: #f0eafc;
+  --chart-series: #a78bfa, #34d399, #fbbf24, #f87171, #c4b5fd, #22d3ee, #fcd34d, #fca5a5;
+}
+
+/* ============ 6. 晨曦（设备监控 / 产线 / 能耗） ============ */
+:root[data-ui-style='crimson'] {
+  --primary: #fb923c;
+  --primary-rgb: 251, 146, 60;
+  --primary-dark: #c2410c;
+  --primary-light: #fdba74;
+  --primary-lighter: #fed7aa;
+  --accent: #f97316;
+  --accent-rgb: 249, 115, 22;
+  --accent-light: #fb923c;
+
+  --success: #34d399;
+  --success-rgb: 52, 211, 153;
+  --warning: #fbbf24;
+  --warning-rgb: 251, 191, 36;
+  --danger: #f87171;
+  --danger-rgb: 248, 113, 113;
+  --status-running-rgb: 52, 211, 153;
+
+  --bg-body: #0c0604;
+  --bg-card: linear-gradient(168deg, rgba(36, 18, 6, 0.86), rgba(36, 18, 6, 0.92) 60%, rgba(36, 18, 6, 0.96));
+  --bg-card-strong: rgba(30, 14, 4, 0.98);
+  --bg-elevated: rgba(40, 18, 6, 0.98);
+
+  --text-secondary: #f2dccc;
+
+  --chart-axis: rgba(252, 222, 190, 0.55);
+  --chart-label: #ffffff;
+  --chart-legend: #f4dccc;
+  --chart-split: rgba(252, 222, 190, 0.18);
+  --chart-tooltip-bg: rgba(24, 12, 4, 0.92);
+  --chart-tooltip-text: #fcf0e4;
+  --chart-series: #fb923c, #34d399, #fbbf24, #f87171, #fdba74, #22d3ee, #fcd34d, #fca5a5;
+}
+
+/* ============ 7. 玫境（品牌 / 安防 / 应急） ============ */
+:root[data-ui-style='rose'] {
+  --primary: #fb7185;
+  --primary-rgb: 251, 113, 133;
+  --primary-dark: #be123c;
+  --primary-light: #fda4af;
+  --primary-lighter: #fecdd3;
+  --accent: #f43f5e;
+  --accent-rgb: 244, 63, 94;
+  --accent-light: #fb7185;
+
+  --success: #34d399;
+  --success-rgb: 52, 211, 153;
+  --warning: #fbbf24;
+  --warning-rgb: 251, 191, 36;
+  --danger: #f87171;
+  --danger-rgb: 248, 113, 113;
+  --status-running-rgb: 52, 211, 153;
+
+  --bg-body: #0c0406;
+  --bg-card: linear-gradient(168deg, rgba(36, 8, 14, 0.86), rgba(36, 8, 14, 0.92) 60%, rgba(36, 8, 14, 0.96));
+  --bg-card-strong: rgba(30, 6, 10, 0.98);
+  --bg-elevated: rgba(40, 8, 14, 0.98);
+
+  --text-secondary: #f2ccd2;
+
+  --chart-axis: rgba(252, 206, 214, 0.55);
+  --chart-label: #ffffff;
+  --chart-legend: #f4ccd2;
+  --chart-split: rgba(252, 206, 214, 0.18);
+  --chart-tooltip-bg: rgba(24, 6, 10, 0.92);
+  --chart-tooltip-text: #fce4e8;
+  --chart-series: #fb7185, #34d399, #fbbf24, #f87171, #fda4af, #22d3ee, #fcd34d, #fca5a5;
+}
+
+/* ============ 8. 星钻（高端未来感） ============ */
+:root[data-ui-style='indigo'] {
+  --primary: #818cf8;
+  --primary-rgb: 129, 140, 248;
+  --primary-dark: #4338ca;
+  --primary-light: #a5b4fc;
+  --primary-lighter: #c7d2fe;
+  --accent: #6366f1;
+  --accent-rgb: 99, 102, 241;
+  --accent-light: #818cf8;
+
+  --success: #34d399;
+  --success-rgb: 52, 211, 153;
+  --warning: #fbbf24;
+  --warning-rgb: 251, 191, 36;
+  --danger: #f87171;
+  --danger-rgb: 248, 113, 113;
+  --status-running-rgb: 52, 211, 153;
+
+  --bg-body: #060618;
+  --bg-card: linear-gradient(168deg, rgba(12, 12, 36, 0.86), rgba(12, 12, 36, 0.92) 60%, rgba(12, 12, 36, 0.96));
+  --bg-card-strong: rgba(8, 8, 30, 0.98);
+  --bg-elevated: rgba(14, 14, 40, 0.98);
+
+  --text-secondary: #ccd0f4;
+
+  --chart-axis: rgba(214, 218, 252, 0.55);
+  --chart-label: #ffffff;
+  --chart-legend: #d4d8f6;
+  --chart-split: rgba(214, 218, 252, 0.18);
+  --chart-tooltip-bg: rgba(8, 8, 24, 0.92);
+  --chart-tooltip-text: #e8eafc;
+  --chart-series: #818cf8, #34d399, #fbbf24, #f87171, #a5b4fc, #22d3ee, #fcd34d, #fca5a5;
+}
+
+/* ============================================================
+ * 白色主题（浅色反转）
+ * 与深色主题相反：浅底 + 深色文字 + 浅投影 + 白玻璃。
+ * 文字对比度均达 WCAG AA。
+ * ========================================================== */
+
+/* ============ 9. 冰白·曜蓝（白底 + 科技蓝青主色） ============ */
+:root[data-ui-style='light-cyan'] {
+  /* 主色族（深一档，保证白底对比度） */
+  --primary: #0891b2;
+  --primary-rgb: 8, 145, 178;
+  --primary-dark: #0e7490;
+  --primary-light: #06b6d4;
+  --primary-lighter: #67e8f9;
+  --accent: #0e7490;
+  --accent-rgb: 14, 116, 144;
+  --accent-light: #0891b2;
+
+  /* 语义色（白底需更深） */
+  --success: #059669;
+  --success-rgb: 5, 150, 105;
+  --success-light: #10b981;
+  --success-bg: rgba(5, 150, 105, 0.12);
+  --warning: #d97706;
+  --warning-rgb: 217, 119, 6;
+  --warning-light: #f59e0b;
+  --warning-bg: rgba(217, 119, 6, 0.12);
+  --danger: #dc2626;
+  --danger-rgb: 220, 38, 38;
+  --danger-light: #ef4444;
+  --danger-bg: rgba(220, 38, 38, 0.1);
+  --status-running-rgb: 5, 150, 105;
+
+  /* 表面层：浅灰白底 + 白色半透卡片 */
+  --bg-body: #eef3f7;
+  --bg-card: linear-gradient(168deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.92) 60%, rgba(248, 251, 253, 0.96));
+  --bg-card-strong: rgba(255, 255, 255, 0.98);
+  --bg-elevated: rgba(255, 255, 255, 0.99);
+  --bg-scene: #dfeaf6;
+  --bg-hover: rgb(var(--primary-rgb) / 0.08);
+  --bg-row: rgb(var(--primary-rgb) / 0.04);
+
+  /* 文字（深色） */
+  --text-primary: #1a2b3a;
+  --text-secondary: #5a7088;
+  --text-muted: #7a8fa3;
+  --text-on-primary: #ffffff;
+
+  /* 描边（浅色，更柔和） */
+  --border-color: rgb(var(--primary-rgb) / 0.22);
+  --border-light: rgb(var(--primary-rgb) / 0.14);
+  --border-strong: rgb(var(--primary-rgb) / 0.4);
+
+  /* 阴影：浅投影（深色主题的深投影在白底上会发脏） */
+  --shadow-xs: 0 1px 2px rgba(20, 40, 60, 0.06);
+  --shadow-sm: 0 2px 6px rgba(20, 40, 60, 0.08);
+  --shadow-md: 0 6px 16px rgba(20, 40, 60, 0.1);
+  --shadow-lg: 0 12px 32px rgba(20, 40, 60, 0.12);
+  --shadow-xl: 0 20px 48px rgba(20, 40, 60, 0.14);
+  --shadow-card: 0 6px 18px rgba(20, 40, 60, 0.08), inset 0 0 20px rgb(var(--primary-rgb) / 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --shadow-card-hover: 0 12px 28px rgba(20, 40, 60, 0.12), 0 0 18px rgb(var(--primary-rgb) / 0.16), inset 0 0 24px rgb(var(--primary-rgb) / 0.06);
+  --shadow-primary: 0 4px 14px rgb(var(--accent-rgb) / 0.25);
+  --shadow-glow-blue: 0 0 18px rgb(var(--primary-rgb) / 0.2);
+  --shadow-glow-cyan: 0 0 18px rgb(var(--accent-rgb) / 0.2);
+  --shadow-glow-green: 0 0 18px rgb(var(--success-rgb) / 0.2);
+  --shadow-glow-warning: 0 0 18px rgb(var(--warning-rgb) / 0.2);
+  --shadow-glow-danger: 0 0 18px rgb(var(--danger-rgb) / 0.22);
+
+  /* 白玻璃浮窗（反转黑玻璃） */
+  --glass-bg:
+    radial-gradient(125% 140% at 50% 0%, rgb(var(--primary-rgb) / 0.08), transparent 58%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(248, 251, 253, 0.88) 55%, rgba(255, 255, 255, 0.92));
+  --glass-bg-strong:
+    radial-gradient(125% 140% at 50% 0%, rgb(var(--primary-rgb) / 0.1), transparent 58%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 251, 253, 0.96) 55%, rgba(255, 255, 255, 0.98));
+  --glass-blur: blur(20px) saturate(1.1);
+  --glass-blur-strong: blur(24px) saturate(1.15);
+  --glass-border: 1px solid rgb(var(--primary-rgb) / 0.18);
+  --glass-inset: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  --glass-shadow: 0 12px 32px rgba(20, 40, 60, 0.1), 0 2px 6px rgba(20, 40, 60, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  --glass-shadow-hover: 0 18px 42px rgba(20, 40, 60, 0.14), 0 4px 10px rgba(20, 40, 60, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+  /* 图表（深色文字/轴线，适配白底；配色仍鲜艳） */
+  --chart-axis: rgba(90, 112, 136, 0.45);
+  --chart-label: #1a2b3a;
+  --chart-legend: #3a4f63;
+  --chart-split: rgba(90, 112, 136, 0.16);
+  --chart-tooltip-bg: rgba(255, 255, 255, 0.96);
+  --chart-tooltip-border: rgb(var(--primary-rgb) / 0.3);
+  --chart-tooltip-text: #1a2b3a;
+  --chart-series: #0891b2, #059669, #d97706, #dc2626, #0ea5e9, #10b981, #f59e0b, #e11d48;
+}
+
+/* ============ 10. 冰白·翡翠（白底 + 深翠绿主色） ============ */
+:root[data-ui-style='light-emerald'] {
+  /* 主色族：深翠绿（能源 / 可持续 / ESG） */
+  --primary: #059669;
+  --primary-rgb: 5, 150, 105;
+  --primary-dark: #047857;
+  --primary-light: #10b981;
+  --primary-lighter: #6ee7b7;
+  --accent: #047857;
+  --accent-rgb: 4, 120, 87;
+  --accent-light: #059669;
+
+  --success: #059669;
+  --success-rgb: 5, 150, 105;
+  --success-light: #10b981;
+  --success-bg: rgba(5, 150, 105, 0.12);
+  --warning: #d97706;
+  --warning-rgb: 217, 119, 6;
+  --warning-light: #f59e0b;
+  --warning-bg: rgba(217, 119, 6, 0.12);
+  --danger: #dc2626;
+  --danger-rgb: 220, 38, 38;
+  --danger-light: #ef4444;
+  --danger-bg: rgba(220, 38, 38, 0.1);
+  --status-running-rgb: 5, 150, 105;
+
+  /* 表面层：偏暖的白底（带一丝绿调，与主色调和） */
+  --bg-body: #eef5f1;
+  --bg-card: linear-gradient(168deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.92) 60%, rgba(247, 253, 250, 0.96));
+  --bg-card-strong: rgba(255, 255, 255, 0.98);
+  --bg-elevated: rgba(255, 255, 255, 0.99);
+  --bg-scene: #dff0e8;
+  --bg-hover: rgb(var(--primary-rgb) / 0.08);
+  --bg-row: rgb(var(--primary-rgb) / 0.04);
+
+  --text-primary: #142a22;
+  --text-secondary: #4a6356;
+  --text-muted: #6b8275;
+  --text-on-primary: #ffffff;
+
+  --border-color: rgb(var(--primary-rgb) / 0.22);
+  --border-light: rgb(var(--primary-rgb) / 0.14);
+  --border-strong: rgb(var(--primary-rgb) / 0.4);
+
+  --shadow-xs: 0 1px 2px rgba(20, 50, 35, 0.06);
+  --shadow-sm: 0 2px 6px rgba(20, 50, 35, 0.08);
+  --shadow-md: 0 6px 16px rgba(20, 50, 35, 0.1);
+  --shadow-lg: 0 12px 32px rgba(20, 50, 35, 0.12);
+  --shadow-xl: 0 20px 48px rgba(20, 50, 35, 0.14);
+  --shadow-card: 0 6px 18px rgba(20, 50, 35, 0.08), inset 0 0 20px rgb(var(--primary-rgb) / 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --shadow-card-hover: 0 12px 28px rgba(20, 50, 35, 0.12), 0 0 18px rgb(var(--primary-rgb) / 0.16), inset 0 0 24px rgb(var(--primary-rgb) / 0.06);
+  --shadow-primary: 0 4px 14px rgb(var(--accent-rgb) / 0.25);
+  --shadow-glow-blue: 0 0 18px rgb(var(--primary-rgb) / 0.2);
+  --shadow-glow-cyan: 0 0 18px rgb(var(--accent-rgb) / 0.2);
+  --shadow-glow-green: 0 0 18px rgb(var(--success-rgb) / 0.2);
+  --shadow-glow-warning: 0 0 18px rgb(var(--warning-rgb) / 0.2);
+  --shadow-glow-danger: 0 0 18px rgb(var(--danger-rgb) / 0.22);
+
+  --glass-bg:
+    radial-gradient(125% 140% at 50% 0%, rgb(var(--primary-rgb) / 0.08), transparent 58%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(247, 253, 250, 0.88) 55%, rgba(255, 255, 255, 0.92));
+  --glass-bg-strong:
+    radial-gradient(125% 140% at 50% 0%, rgb(var(--primary-rgb) / 0.1), transparent 58%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 253, 250, 0.96) 55%, rgba(255, 255, 255, 0.98));
+  --glass-blur: blur(20px) saturate(1.1);
+  --glass-blur-strong: blur(24px) saturate(1.15);
+  --glass-border: 1px solid rgb(var(--primary-rgb) / 0.18);
+  --glass-inset: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  --glass-shadow: 0 12px 32px rgba(20, 50, 35, 0.1), 0 2px 6px rgba(20, 50, 35, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  --glass-shadow-hover: 0 18px 42px rgba(20, 50, 35, 0.14), 0 4px 10px rgba(20, 50, 35, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+  --chart-axis: rgba(74, 99, 86, 0.45);
+  --chart-label: #142a22;
+  --chart-legend: #345046;
+  --chart-split: rgba(74, 99, 86, 0.16);
+  --chart-tooltip-bg: rgba(255, 255, 255, 0.96);
+  --chart-tooltip-border: rgb(var(--primary-rgb) / 0.3);
+  --chart-tooltip-text: #142a22;
+  --chart-series: #059669, #0891b2, #d97706, #dc2626, #10b981, #0ea5e9, #f59e0b, #e11d48;
+}

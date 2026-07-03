@@ -1,0 +1,173 @@
+/**
+ * tokens.css — 设计令牌（Design Tokens）总表
+ * 来源：UI设计系统规范.md 第 3 章
+ * 这是整套系统的根基。所有视觉值都是 CSS 变量，切主题只换变量。
+ * 颜色统一用 rgb(var(--xxx-rgb) / α) 三元组形式，便于运行时拼透明度。
+ */
+
+:root {
+  /* -----------------------------------------------------------
+   * 3.1 布局尺寸
+   * --------------------------------------------------------- */
+  --header-h: 78px;      /* 顶栏高度 */
+  --sidebar-w: 320px;    /* 侧栏宽度 */
+  --sidebar-gap: 10px;   /* 侧栏卡片间距 */
+  --sidebar-pad: 12px;   /* 侧栏内边距 */
+  --notch: 12px;         /* 切角尺寸（核心视觉参数） */
+
+  /* -----------------------------------------------------------
+   * 3.2 圆角（机甲风：极小圆角 + 切角为主）
+   * --------------------------------------------------------- */
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  --glass-radius: 14px;  /* 浮窗专用较大圆角 */
+
+  /* -----------------------------------------------------------
+   * 3.3 主色（冷峻低饱和工业灰青）— 默认主题「曜蓝·通透」
+   * --------------------------------------------------------- */
+  --primary: #6fb2c9;
+  --primary-rgb: 111, 178, 201;
+  --primary-dark: #4a8a9e;
+  --primary-light: #8fc3d4;
+  --primary-lighter: #b8d8e0;
+
+  --accent: #5fa8bd;
+  --accent-rgb: 95, 168, 189;
+  --accent-light: #82bccc;
+
+  --primary-bg: rgb(var(--primary-rgb) / 0.20);
+  --primary-border: rgb(var(--primary-rgb) / 0.42);
+  --primary-gradient: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+  --primary-gradient-soft: linear-gradient(135deg, rgb(var(--primary-rgb) / 0.22), rgb(var(--accent-rgb) / 0.18));
+
+  /* -----------------------------------------------------------
+   * 3.4 语义色（同步低饱和）
+   * --------------------------------------------------------- */
+  --success: #6fc9a8;
+  --success-rgb: 111, 201, 168;
+  --success-light: #94d6bd;
+  --success-bg: rgba(111, 201, 168, 0.20);
+
+  --warning: #e0b85c;
+  --warning-rgb: 224, 184, 92;
+  --warning-light: #ecca82;
+  --warning-bg: rgba(224, 184, 92, 0.20);
+
+  --danger: #d87878;
+  --danger-rgb: 216, 120, 120;
+  --danger-light: #e09a9a;
+  --danger-bg: rgba(216, 120, 120, 0.22);
+
+  --info: var(--primary);
+  --info-rgb: var(--primary-rgb);
+  --info-light: var(--primary-light);
+  --info-bg: var(--primary-bg);
+
+  /* 运行状态点专用翠绿（动态脉冲） */
+  --status-running-rgb: 47, 230, 167;
+
+  /* -----------------------------------------------------------
+   * 3.5 表面层（极透纯黑底 + 深蓝青渐变卡片）
+   * --------------------------------------------------------- */
+  --bg-body: #050709;             /* 极透纯黑 */
+  --bg-card: linear-gradient(168deg, rgba(5, 30, 54, 0.2), rgba(5, 30, 54, 0.4) 60%, rgba(5, 30, 54, 0.45));
+  --bg-card-strong: rgba(4, 24, 44, 0.94);   /* 高对比实底 */
+  --bg-elevated: rgba(6, 30, 54, 0.97);
+  --bg-scene: #dfeaf6;            /* 3D 场景底色（浅色，供模型衬托） */
+  --bg-hover: rgb(var(--primary-rgb) / 0.18);
+  --bg-row: rgb(var(--primary-rgb) / 0.12);
+  --bg-sidebar: transparent;      /* 透明浮层侧栏 */
+
+  /* -----------------------------------------------------------
+   * 3.6 文字
+   * --------------------------------------------------------- */
+  --text-primary: #fff;           /* 主文字（极透底上需提亮） */
+  --text-secondary: #b8d8ea;      /* 次级文字 */
+  --text-muted: #fff;             /* 弱化但保持亮（极透底补偿） */
+  --text-on-primary: #032030;     /* 主色背景上的文字 */
+
+  /* -----------------------------------------------------------
+   * 3.7 描边
+   * --------------------------------------------------------- */
+  --border-color: rgb(var(--primary-rgb) / 0.36);
+  --border-light: rgb(var(--primary-rgb) / 0.22);
+  --border-strong: rgb(var(--primary-rgb) / 0.60);
+
+  /* -----------------------------------------------------------
+   * 3.8 阴影（深底投影 + 辉光双体系）
+   * --------------------------------------------------------- */
+  /* 常规层级投影 */
+  --shadow-xs: 0 1px 3px rgba(0, 6, 10, 0.55);
+  --shadow-sm: 0 3px 10px rgba(0, 6, 10, 0.58);
+  --shadow-md: 0 8px 24px rgba(0, 6, 10, 0.62);
+  --shadow-lg: 0 16px 42px rgba(0, 6, 10, 0.66);
+  --shadow-xl: 0 26px 64px rgba(0, 6, 10, 0.70);
+
+  /* 卡片：深底投影 + 主题色内辉光 + 顶部高光内描边 */
+  --shadow-card: 0 10px 32px rgba(0, 8, 14, 0.58),
+                 inset 0 0 26px rgb(var(--accent-rgb) / 0.12),
+                 inset 0 1px 0 rgba(160, 205, 220, 0.20);
+  --shadow-card-hover: 0 16px 42px rgba(0, 8, 14, 0.66),
+                       0 0 24px rgb(var(--primary-rgb) / 0.28),
+                       inset 0 0 30px rgb(var(--accent-rgb) / 0.18);
+  --shadow-primary: 0 4px 16px rgb(var(--accent-rgb) / 0.45);
+
+  /* 状态辉光（单一颜色向外发光） */
+  --shadow-glow-blue: 0 0 24px rgb(var(--primary-rgb) / 0.30);
+  --shadow-glow-cyan: 0 0 24px rgb(var(--accent-rgb) / 0.30);
+  --shadow-glow-green: 0 0 24px rgb(var(--success-rgb) / 0.26);
+  --shadow-glow-warning: 0 0 24px rgb(var(--warning-rgb) / 0.24);
+  --shadow-glow-danger: 0 0 24px rgb(var(--danger-rgb) / 0.28);
+
+  /* -----------------------------------------------------------
+   * 3.9 统一黑色玻璃浮窗（FZM Glass）
+   * --------------------------------------------------------- */
+  --glass-bg:
+    radial-gradient(125% 140% at 50% 0%, rgb(var(--primary-rgb) / 0.12), transparent 58%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.42), rgba(0, 6, 10, 0.48) 55%, rgba(0, 0, 0, 0.55));
+  --glass-bg-strong:
+    radial-gradient(125% 140% at 50% 0%, rgb(var(--primary-rgb) / 0.14), transparent 58%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.52), rgba(0, 6, 10, 0.58) 55%, rgba(0, 0, 0, 0.66));
+  --glass-blur: blur(28px) saturate(1.3);
+  --glass-blur-strong: blur(32px) saturate(1.4);
+  --glass-border: 1px solid rgb(var(--primary-rgb) / 0.28);
+  --glass-inset: inset 0 0 0 1px rgba(255, 255, 255, 0.10);
+  --glass-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.45),
+    0 2px 10px rgba(0, 0, 0, 0.35),
+    0 0 24px rgb(var(--primary-rgb) / 0.16),
+    inset 0 1px 0 rgba(200, 230, 240, 0.18);
+  --glass-shadow-hover:
+    0 24px 60px rgba(0, 0, 0, 0.5),
+    0 4px 14px rgba(0, 0, 0, 0.4),
+    0 0 32px rgb(var(--primary-rgb) / 0.24),
+    inset 0 1px 0 rgba(200, 230, 240, 0.24);
+
+  /* -----------------------------------------------------------
+   * 6. 字体与排版
+   * --------------------------------------------------------- */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display',
+               'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  /* 等宽数字（KPI 数值、ID、时间） */
+  --font-mono: 'SF Mono', 'DIN Alternate', 'JetBrains Mono', 'Roboto Mono', 'Oswald', monospace;
+
+  /* -----------------------------------------------------------
+   * 10.2 图表专用变量（canvas 无法读 var，故单独定义并随主题覆盖）
+   * --------------------------------------------------------- */
+  --chart-primary: var(--primary);
+  --chart-success: var(--success);
+  --chart-warning: var(--warning);
+  --chart-danger: var(--danger);
+  --chart-axis: rgba(190, 230, 255, 0.55);    /* 坐标轴线 */
+  --chart-label: #ffffff;                       /* 轴标签 */
+  --chart-legend: #d6e8f7;                      /* 图例文字 */
+  --chart-split: rgba(190, 230, 255, 0.18);     /* 分割线 */
+  --chart-tooltip-bg: rgba(0, 8, 18, 0.82);
+  --chart-tooltip-border: rgb(var(--primary-rgb) / 0.40);
+  --chart-tooltip-text: #eef6ff;
+
+  /* ECharts 多系列配色（canvas 用，需固定色值；高饱和鲜艳版） */
+  --chart-series: #22d3ee, #34d399, #fbbf24, #f87171, #38bdf8, #a3e635, #fb923c, #e879f9;
+}

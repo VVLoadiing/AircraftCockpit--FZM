@@ -1,0 +1,95 @@
+/**
+ * base.css — 全局基础样式
+ * 来源：UI设计系统规范.md 第 4.1 节（科技网格背景）、第 7.9 节（滚动条）、
+ *       第 11.3 节（极透底 SVG 描边补偿）、第 6 节（字体栈）
+ */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background-color: var(--bg-body);
+}
+
+/* -----------------------------------------------------------
+ * 4.1 全局背景（科技网格）
+ * 深色主题：极淡的主色网格 + 顶部辉光
+ * 白色主题：网格线加深，否则在白底上不可见
+ * --------------------------------------------------------- */
+body {
+  background-image:
+    radial-gradient(1200px 700px at 50% -15%, rgb(var(--primary-rgb) / 0.1), transparent 65%),
+    /* 顶部辉光 */
+    radial-gradient(1000px 600px at -10% 110%, rgb(var(--accent-rgb) / 0.06), transparent 65%),
+    /* 左下辉光 */
+    linear-gradient(rgb(var(--primary-rgb) / 0.035) 1px, transparent 1px),
+    /* 水平网格线 */
+    linear-gradient(90deg, rgb(var(--primary-rgb) / 0.035) 1px, transparent 1px); /* 垂直网格线 */
+  background-size: auto, auto, 36px 36px, 36px 36px;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* 白色主题：网格线加深 + 顶部辉光增强，保证白底上可见 */
+:root[data-ui-style^='light'] body {
+  background-image:
+    radial-gradient(1200px 700px at 50% -15%, rgb(var(--primary-rgb) / 0.12), transparent 65%),
+    radial-gradient(1000px 600px at -10% 110%, rgb(var(--accent-rgb) / 0.08), transparent 65%),
+    linear-gradient(rgb(var(--primary-rgb) / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--primary-rgb) / 0.06) 1px, transparent 1px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* -----------------------------------------------------------
+ * 7.9 滚动条（统一深色科技风）
+ * --------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg,
+      rgb(var(--primary-rgb) / 0.45),
+      rgb(var(--accent-rgb) / 0.45));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg,
+      rgb(var(--primary-rgb) / 0.70),
+      rgb(var(--accent-rgb) / 0.70));
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--primary-rgb) / 0.45) rgba(255, 255, 255, 0.04);
+}
+
+/* -----------------------------------------------------------
+ * 11.3 极透底可读性补偿（全局规则）
+ * 深色极透背景上的 SVG 线稿图标会发飘看不清，统一加描边光补偿
+ * --------------------------------------------------------- */
+.fzm-tech-hud .fz-glass svg,
+.fzm-tech-hud .glass-panel svg,
+.fzm-tech-hud .card svg {
+  filter:
+    drop-shadow(0 0 2px rgba(0, 0, 0, 0.85))
+    drop-shadow(0 0 1px rgb(var(--primary-rgb) / 0.45));
+}
+
+/* 用 currentColor 的默认图标整体提亮 */
+.fzm-tech-hud .fz-glass svg[stroke='currentColor'],
+.fzm-tech-hud .card svg[stroke='currentColor'] {
+  color: #e9f7ff;
+}

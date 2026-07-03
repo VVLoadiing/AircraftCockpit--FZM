@@ -1,0 +1,9 @@
+/* playground 自带：仅引入组件库令牌样式 + 基础（演示页自带 HUD Frame） */
+@import '@fzm/ui/styles';
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}

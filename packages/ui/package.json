@@ -1,0 +1,55 @@
+{
+  "name": "@fzm/ui",
+  "version": "1.0.0",
+  "description": "曜蓝机甲 Tech HUD —— Vue 3 深色科技风 UI 组件库（大屏数字孪生 / 工业监控 / 智慧中台）",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "vue3",
+    "components",
+    "ui",
+    "design-system",
+    "tech-hud",
+    "dashboard",
+    "digital-twin"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/fzm-ui.umd.cjs",
+  "module": "./dist/fzm-ui.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/fzm-ui.js",
+      "require": "./dist/fzm-ui.umd.cjs"
+    },
+    "./styles": "./dist/fzm-ui.css",
+    "./package.json": "./package.json"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "clean": "rimraf dist"
+  },
+  "peerDependencies": {
+    "vue": "^3.4.0",
+    "echarts": "^5.4.0 || ^6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "echarts": { "optional": true }
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.1.4",
+    "vite": "^5.4.10",
+    "vite-plugin-dts": "^4.3.0",
+    "vue-tsc": "^2.1.10"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
