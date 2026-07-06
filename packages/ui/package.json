@@ -1,6 +1,6 @@
 {
-  "name": "@fzm/ui",
-  "version": "1.0.0",
+  "name": "fzm-tech-hud-ui",
+  "version": "1.0.1",
   "description": "曜蓝机甲 Tech HUD —— Vue 3 深色科技风 UI 组件库（大屏数字孪生 / 工业监控 / 智慧中台）",
   "type": "module",
   "license": "MIT",

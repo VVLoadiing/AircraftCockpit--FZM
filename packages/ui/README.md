@@ -1,4 +1,4 @@
-# @fzm/ui
+# fzm-tech-hud-ui
 
 > 曜蓝机甲 Tech HUD —— Vue 3 科技风 UI 组件库（深色为主，含 2 套白色主题）
 > 面向 **大屏数字孪生 / 工业监控 / 智慧中台**，设计语言源自 `UI设计系统规范.md`。
@@ -15,7 +15,7 @@
 ## 安装
 
 ```bash
-pnpm add @fzm/ui
+pnpm add fzm-tech-hud-ui
 # peer 依赖
 pnpm add vue
 # 如需图表
@@ -29,8 +29,8 @@ pnpm add echarts
 ```ts
 // main.ts
 import { createApp } from 'vue'
-import FzmUI from '@fzm/ui'
-import '@fzm/ui/styles'  // ⚠️ 样式需单独引入
+import FzmUI from 'fzm-tech-hud-ui'
+import 'fzm-tech-hud-ui/styles'  // ⚠️ 样式需单独引入
 import App from './App.vue'
 
 const app = createApp(App)
@@ -50,8 +50,8 @@ app.mount('#app')
 
 ```vue
 <script setup lang="ts">
-import { TechCard, KpiItem, StatusDot } from '@fzm/ui'
-import '@fzm/ui/styles'
+import { TechCard, KpiItem, StatusDot } from 'fzm-tech-hud-ui'
+import 'fzm-tech-hud-ui/styles'
 </script>
 
 <template>
@@ -67,7 +67,7 @@ import '@fzm/ui/styles'
 ## 主题切换
 
 ```ts
-import { useUiTheme } from '@fzm/ui'
+import { useUiTheme } from 'fzm-tech-hud-ui'
 
 const { style, setStyle, options } = useUiTheme()
 // 切换主题（自动写 localStorage + 同步 <html data-ui-style>）
@@ -83,8 +83,8 @@ setStyle('green')
 ```vue
 <script setup lang="ts">
 import { computed } from 'vue'
-import { BaseChart, useChartPalette, buildLineChart } from '@fzm/ui'
-import '@fzm/ui/styles'
+import { BaseChart, useChartPalette, buildLineChart } from 'fzm-tech-hud-ui'
+import 'fzm-tech-hud-ui/styles'
 import type { EChartsOption } from 'echarts'
 
 const { palette } = useChartPalette()
@@ -111,7 +111,7 @@ const option = computed<EChartsOption>(
 涉及渐变 / 透明度时，用 `withAlpha()` 把颜色转成 `rgba()`（canvas 无法解析 CSS 变量字符串）：
 
 ```ts
-import { withAlpha } from '@fzm/ui'
+import { withAlpha } from 'fzm-tech-hud-ui'
 withAlpha(palette.value.primary, 0.2) // 'rgba(8,145,178,0.2)'
 ```
 
@@ -175,7 +175,7 @@ withAlpha(palette.value.primary, 0.2) // 'rgba(8,145,178,0.2)'
 
 ## 导出的组合式函数、工具与图表预设
 
-除组件外，`@fzm/ui` 还从包根导出以下 API：
+除组件外，`fzm-tech-hud-ui` 还从包根导出以下 API：
 
 | 导出 | 类型 | 说明 |
 |------|------|------|
