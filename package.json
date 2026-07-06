@@ -1,6 +1,6 @@
 {
   "name": "fzm-tech-hud-template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "曜蓝机甲 Tech HUD — 面向大屏数字孪生 / 工业监控 / 智慧中台的 Vue 3 项目模板（含可发布 npm 的 UI 组件库）",
   "type": "module",
