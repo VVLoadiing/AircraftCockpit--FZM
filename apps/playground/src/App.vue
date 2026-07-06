@@ -1,26 +1,54 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { initUiStyle, HudFrame, TechCard } from '@fzm/ui'
+import { ref, computed, provide, nextTick } from 'vue'
+import { initUiStyle, HudFrame } from '@fzm/ui'
 import ThemeSwitcher from './components/ThemeSwitcher.vue'
+import GalleryView from './views/GalleryView.vue'
 import ComponentsView from './views/ComponentsView.vue'
 import DashboardView from './views/DashboardView.vue'
 
 // App 启动即恢复已存主题
 initUiStyle()
 
+type TabId = 'dashboard' | 'gallery' | 'components'
+
 const tabs = [
-  { id: 'dashboard', label: '大屏组装示例', desc: '组件拼装成完整项目' },
-  { id: 'components', label: '组件浏览', desc: '逐个查看组件外观与用法' },
-] as const
+  { id: 'dashboard' as TabId, label: '大屏组装示例', desc: '组件拼装成完整项目，点击区域跳转组件' },
+  { id: 'gallery' as TabId, label: '组件总览', desc: '按分类查看全部 29 个组件' },
+  { id: 'components' as TabId, label: '组件演示', desc: '逐个查看组件外观与用法' },
+]
 
-const activeTab = ref<(typeof tabs)[number]['id']>('dashboard')
+const activeTab = ref<TabId>('dashboard')
+// 待跳转的组件锚点（navigateToComponent 设置，ComponentsView 消费后清空）
+const pendingAnchor = ref<string>('')
 
-const currentView = computed(() =>
-  activeTab.value === 'dashboard' ? DashboardView : ComponentsView,
-)
+const currentView = computed(() => {
+  if (activeTab.value === 'dashboard') return DashboardView
+  if (activeTab.value === 'gallery') return GalleryView
+  return ComponentsView
+})
 
-// 引用 TechCard 以便类型可用（避免未使用告警）
-void TechCard
+/**
+ * 跳转到指定组件的演示锚点。
+ * 切换到 components tab，设置锚点，ComponentsView watch 到后滚动定位。
+ * @param anchor 组件 kebab-case 名，如 'tech-card' / 'kpi-item'
+ */
+function navigateToComponent(anchor: string) {
+  pendingAnchor.value = anchor
+  if (activeTab.value !== 'components') {
+    activeTab.value = 'components'
+  }
+  // 已在 components tab 时，watch 不会因同值触发，手动滚一次
+  nextTick(() => {
+    if (activeTab.value === 'components') {
+      const el = document.getElementById(`comp-${anchor}`)
+      el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  })
+}
+
+// 提供给子组件（DashboardView / GalleryView）调用
+provide('navigateToComponent', navigateToComponent)
+provide('activeTab', activeTab)
 </script>
 
 <template>
@@ -42,6 +70,7 @@ void TechCard
           :key="t.id"
           class="app__tab"
           :class="{ 'is-active': activeTab === t.id }"
+          :title="t.desc"
           @click="activeTab = t.id"
         >
           {{ t.label }}
@@ -52,7 +81,7 @@ void TechCard
     </header>
 
     <main class="app__main">
-      <component :is="currentView" />
+      <component :is="currentView" :pending-anchor="pendingAnchor" />
     </main>
   </div>
 </template>
@@ -70,6 +99,9 @@ void TechCard
 
 /* —— 顶部浮条 —— */
 .app__header {
+  position: relative;
+  /* 顶栏层级高于主体，确保下拉框浮层不被 main 内容遮挡 */
+  z-index: 10;
   flex-shrink: 0;
   display: flex;
   align-items: center;

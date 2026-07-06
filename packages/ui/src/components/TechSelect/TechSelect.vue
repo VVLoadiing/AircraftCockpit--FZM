@@ -9,6 +9,8 @@ interface SelectOption {
   label: string
   value: string | number
   disabled?: boolean
+  /** 允许携带任意额外字段（如 color、desc），供 #option / #trigger 插槽读取 */
+  [key: string]: unknown
 }
 
 const props = withDefaults(
@@ -40,6 +42,11 @@ const rootRef = ref<HTMLElement | null>(null)
 const selectedLabel = computed(() => {
   const hit = props.options.find((o) => o.value === props.modelValue)
   return hit ? hit.label : ''
+})
+
+/** 当前选中的完整 option 对象（供 #trigger 插槽访问原始数据，如自定义颜色字段） */
+const selectedOption = computed(() => {
+  return props.options.find((o) => o.value === props.modelValue) ?? null
 })
 
 function toggle() {
@@ -86,11 +93,13 @@ watch(open, (v) => {
 
 <template>
   <div ref="rootRef" class="fzm-select" :class="{ 'is-disabled': disabled, 'is-open': open }">
-    <!-- 触发器 -->
+    <!-- 触发器：支持 #trigger 插槽自定义显示（如带彩色圆点） -->
     <button type="button" class="fzm-select__trigger" :disabled="disabled" @click="toggle">
-      <span class="fzm-select__value" :class="{ 'is-placeholder': !selectedLabel }">
-        {{ selectedLabel || placeholder }}
-      </span>
+      <slot name="trigger" :option="selectedOption" :label="selectedLabel">
+        <span class="fzm-select__value" :class="{ 'is-placeholder': !selectedLabel }">
+          {{ selectedLabel || placeholder }}
+        </span>
+      </slot>
       <svg
         class="fzm-select__arrow"
         viewBox="0 0 24 24"
@@ -116,7 +125,10 @@ watch(open, (v) => {
           :class="{ 'is-selected': opt.value === modelValue, 'is-disabled': opt.disabled }"
           @click="pick(opt)"
         >
-          <span class="fzm-select__option-label">{{ opt.label }}</span>
+          <!-- 支持 #option 插槽自定义选项内容（接收 option）；否则默认显示 label -->
+          <span class="fzm-select__option-label">
+            <slot name="option" :option="opt">{{ opt.label }}</slot>
+          </span>
           <svg
             v-if="opt.value === modelValue"
             class="fzm-select__check"
@@ -225,12 +237,15 @@ watch(open, (v) => {
   list-style: none;
   max-height: 220px;
   overflow-y: auto;
-  background: var(--glass-bg-strong);
-  backdrop-filter: var(--glass-blur-strong);
-  -webkit-backdrop-filter: var(--glass-blur-strong);
-  border: var(--glass-border);
+  /* 用实底（非半透明毛玻璃），保证浮在任何内容之上都清晰可读 */
+  background: var(--bg-elevated);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius-md);
-  box-shadow: var(--glass-shadow);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.5),
+    0 0 16px rgb(var(--primary-rgb) / 0.18);
 }
 
 .fzm-select__option {

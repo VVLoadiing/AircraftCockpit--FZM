@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch, nextTick } from 'vue'
 import {
   TechCard,
   GlassPanel,
@@ -34,6 +34,27 @@ import {
   TechAvatar,
 } from '@fzm/ui'
 
+// App 传入的待跳转锚点（点击大屏/总览组件名后触发）
+const props = defineProps<{ pendingAnchor?: string }>()
+const emit = defineEmits<{ (e: 'consumed'): void }>()
+
+// 监听锚点变化，滚动到对应组件 demo
+watch(
+  () => props.pendingAnchor,
+  async (anchor) => {
+    if (!anchor) return
+    await nextTick()
+    const el = document.getElementById(`comp-${anchor}`)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      // 高亮闪烁，提示定位到的卡片
+      el.classList.add('is-highlight')
+      setTimeout(() => el.classList.remove('is-highlight'), 1600)
+    }
+    emit('consumed') // 通知 App 清空锚点
+  },
+)
+
 // 演示用的响应式状态
 const inputValue = ref('FX-3200')
 const selectValue = ref('online')
@@ -46,7 +67,7 @@ const tags = ref(['产线A', 'A区', '高温'])
 
 <template>
   <div class="components-view">
-    <TechCard title="TechCard · 切角科技面板" class="components-view__block">
+    <TechCard id="comp-tech-card" title="TechCard · 切角科技面板" class="components-view__block">
       <p class="components-view__desc">
         最核心容器。切角 + 顶部扫光线 + 左切角斜边高亮 + 左侧纵向光柱。
         带可选的科技横幅条标题。
@@ -63,7 +84,7 @@ const tags = ref(['产线A', 'A区', '高温'])
       </div>
     </TechCard>
 
-    <TechCard title="GlassPanel / FzGlass · 玻璃浮层" class="components-view__block">
+    <TechCard id="comp-glass-panel" title="GlassPanel / FzGlass · 玻璃浮层" class="components-view__block">
       <p class="components-view__desc">
         GlassPanel 用于场景叠加的切角玻璃浮层；FzGlass 为弹窗/详情卡的统一外观。
       </p>
@@ -89,7 +110,7 @@ const tags = ref(['产线A', 'A区', '高温'])
       </div>
     </TechCard>
 
-    <TechCard title="KpiItem · KPI 大数字" class="components-view__block">
+    <TechCard id="comp-kpi-item" title="KpiItem · KPI 大数字" class="components-view__block">
       <div class="components-view__demo components-view__demo--inline">
         <KpiItem :value="186" label="在线设备" type="success" />
         <KpiItem :value="12" label="告警数" type="warning" />
@@ -99,7 +120,7 @@ const tags = ref(['产线A', 'A区', '高温'])
       </div>
     </TechCard>
 
-    <TechCard title="StatusDot · 状态点" class="components-view__block">
+    <TechCard id="comp-status-dot" title="StatusDot · 状态点" class="components-view__block">
       <div class="components-view__demo components-view__demo--inline">
         <StatusDot type="running" label="运行" />
         <StatusDot type="standby" label="待机" />
@@ -110,7 +131,7 @@ const tags = ref(['产线A', 'A区', '高温'])
       </div>
     </TechCard>
 
-    <TechCard title="Badge · 徽章" class="components-view__block">
+    <TechCard id="comp-count-badge" title="Badge · 徽章" class="components-view__block">
       <div class="components-view__demo components-view__demo--inline">
         <CountBadge :value="99" />
         <CountBadge :value="12" type="warning" />
@@ -122,7 +143,7 @@ const tags = ref(['产线A', 'A区', '高温'])
       </div>
     </TechCard>
 
-    <TechCard title="ProgressBar · 切角流光进度条" class="components-view__block">
+    <TechCard id="comp-progress-bar" title="ProgressBar · 切角流光进度条" class="components-view__block">
       <div style="display: flex; flex-direction: column; gap: 12px">
         <ProgressBar :value="42" type="info" show-text />
         <ProgressBar :value="68" type="success" show-text />
@@ -132,7 +153,7 @@ const tags = ref(['产线A', 'A区', '高温'])
       </div>
     </TechCard>
 
-    <TechCard title="HudButton / HudChip · HUD 按钮与提示" class="components-view__block">
+    <TechCard id="comp-hud-button" title="HudButton / HudChip · HUD 按钮与提示" class="components-view__block">
       <div class="components-view__demo components-view__demo--inline">
         <HudButton>默认</HudButton>
         <HudButton type="primary">主操作</HudButton>
@@ -147,7 +168,7 @@ const tags = ref(['产线A', 'A区', '高温'])
       </div>
     </TechCard>
 
-    <TechCard title="MetricBox · Mini 统计小方块" class="components-view__block">
+    <TechCard id="comp-metric-box" title="MetricBox · Mini 统计小方块" class="components-view__block">
       <div class="components-view__demo components-view__metrics">
         <MetricBox :value="1284" unit="件" label="今日产量" type="success" />
         <MetricBox :value="3.2" unit="kWh" label="能耗" type="warning" />
@@ -156,7 +177,7 @@ const tags = ref(['产线A', 'A区', '高温'])
       </div>
     </TechCard>
 
-    <TechCard title="DataRow / TechRow · 数据行" class="components-view__block">
+    <TechCard id="comp-data-row" title="DataRow / TechRow · 数据行" class="components-view__block">
       <div class="components-view__demo components-view__two-col">
         <div style="display: flex; flex-direction: column; gap: 2px">
           <DataRow label="设备 ID" value="FX-3200-007" />
@@ -172,7 +193,7 @@ const tags = ref(['产线A', 'A区', '高温'])
     </TechCard>
 
     <!-- ============ 新增：输入交互 ============ -->
-    <TechCard title="TechInput / TechSelect / TechSwitch · 输入交互" class="components-view__block">
+    <TechCard id="comp-tech-input" title="TechInput / TechSelect / TechSwitch · 输入交互" class="components-view__block">
       <div class="components-view__demo" style="flex-direction: column; align-items: stretch; max-width: 320px; gap: 12px">
         <TechInput v-model="inputValue" placeholder="请输入设备编号" clearable>
           <template #prefix>
@@ -209,7 +230,7 @@ const tags = ref(['产线A', 'A区', '高温'])
     </TechCard>
 
     <!-- ============ 新增：导航 ============ -->
-    <TechCard title="TechTabs / Segmented · 导航切换" class="components-view__block">
+    <TechCard id="comp-tech-tabs" title="TechTabs / Segmented · 导航切换" class="components-view__block">
       <TechTabs
         v-model="tabValue"
         :items="[
@@ -237,7 +258,7 @@ const tags = ref(['产线A', 'A区', '高温'])
     </TechCard>
 
     <!-- ============ 新增：反馈展示 ============ -->
-    <TechCard title="TechTag / TechEmpty / LoadingSpinner · 反馈展示" class="components-view__block">
+    <TechCard id="comp-tech-tag" title="TechTag / TechEmpty / LoadingSpinner · 反馈展示" class="components-view__block">
       <div class="components-view__demo components-view__demo--inline" style="margin-bottom: 12px">
         <TechTag>默认</TechTag>
         <TechTag type="success">运行中</TechTag>
@@ -255,7 +276,7 @@ const tags = ref(['产线A', 'A区', '高温'])
       </div>
     </TechCard>
 
-    <TechCard title="CountUp / TechAvatar · 数字滚动与头像" class="components-view__block">
+    <TechCard id="comp-count-up" title="CountUp / TechAvatar · 数字滚动与头像" class="components-view__block">
       <div class="components-view__demo components-view__demo--inline" style="gap: 24px">
         <CountUp :value="1284" suffix="件" type="success" />
         <CountUp :value="94.6" :decimals="1" suffix="%" type="warning" />
@@ -282,6 +303,17 @@ const tags = ref(['产线A', 'A区', '高温'])
 
 .components-view__block {
   width: 100%;
+  /* 锚点定位时留出顶部空间，避免被浮条遮挡 */
+  scroll-margin-top: 16px;
+  transition: box-shadow 0.3s ease, outline-color 0.3s ease;
+  outline: 2px solid transparent;
+  outline-offset: 4px;
+}
+
+/* 跳转定位后的高亮闪烁提示 */
+.components-view__block.is-highlight {
+  outline-color: var(--primary);
+  box-shadow: 0 0 24px rgb(var(--primary-rgb) / 0.5);
 }
 
 .components-view__desc {

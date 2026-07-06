@@ -1,7 +1,8 @@
 <script setup lang="ts">
 /**
  * DashboardView — 大屏组装示例
- * 证明组件可拼装成完整项目：3D 场景占位铺底 + 双侧栏浮层 + 顶部 KPI。
+ * 3D 场景占位铺底 + 双侧栏浮层 + 顶部 KPI。
+ * 各组件区域可用 JumpLink 包裹，点击跳转到组件演示页（hover 显示提示）。
  */
 import { computed } from 'vue'
 import {
@@ -22,6 +23,7 @@ import {
   CountBadge,
 } from '@fzm/ui'
 import type { EChartsOption } from 'echarts'
+import JumpLink from '../components/JumpLink.vue'
 
 const { palette } = useChartPalette()
 
@@ -104,28 +106,32 @@ const alertList = [
     </Sidebar>
 
     <!-- 中间顶部 KPI 浮条 -->
-    <div class="dashboard__kpi-bar">
-      <KpiItem :value="2" :unit="'/3'" label="产线" type="success" />
-      <KpiItem :value="186" label="设备在线" type="info" />
-      <KpiItem :value="94.6" unit="%" label="综合效率 OEE" type="success" />
-      <KpiItem :value="12" label="告警数" type="warning" />
-      <KpiItem :value="3" label="故障数" type="danger" />
-    </div>
+    <JumpLink to="kpi-item" label="KpiItem" class="dashboard__kpi-jump">
+      <div class="dashboard__kpi-bar">
+        <KpiItem :value="2" :unit="'/3'" label="产线" type="success" />
+        <KpiItem :value="186" label="设备在线" type="info" />
+        <KpiItem :value="94.6" unit="%" label="综合效率 OEE" type="success" />
+        <KpiItem :value="12" label="告警数" type="warning" />
+        <KpiItem :value="3" label="故障数" type="danger" />
+      </div>
+    </JumpLink>
 
     <!-- 右侧栏 -->
     <Sidebar class="dashboard__sidebar dashboard__sidebar--right">
       <!-- 告警列表：限制内容区最大高度，超出滚动；标题固定不动 -->
-      <TechCard title="告警列表" max-height="220px">
-        <TechRow v-for="(a, i) in alertList" :key="i" :active="i === 0">
-          <template #prefix>
-            <LevelBadge :level="a.level" />
-          </template>
-          {{ a.text }}
-          <template #suffix>
-            <span class="dashboard__alert-time">{{ a.time }}</span>
-          </template>
-        </TechRow>
-      </TechCard>
+      <JumpLink to="data-row" label="TechRow / LevelBadge">
+        <TechCard title="告警列表" max-height="220px">
+          <TechRow v-for="(a, i) in alertList" :key="i" :active="i === 0">
+            <template #prefix>
+              <LevelBadge :level="a.level" />
+            </template>
+            {{ a.text }}
+            <template #suffix>
+              <span class="dashboard__alert-time">{{ a.time }}</span>
+            </template>
+          </TechRow>
+        </TechCard>
+      </JumpLink>
 
       <TechCard title="产能统计">
         <div class="dashboard__chart">
@@ -133,27 +139,31 @@ const alertList = [
         </div>
       </TechCard>
 
-      <TechCard title="核心指标">
-        <div class="dashboard__metrics">
-          <MetricBox :value="1284" label="今日产量" unit="件" type="success" />
-          <MetricBox :value="3.2" label="能耗" unit="kWh" type="warning" />
-          <MetricBox :value="98.2" label="良品率" unit="%" />
-        </div>
-      </TechCard>
+      <JumpLink to="metric-box" label="MetricBox">
+        <TechCard title="核心指标">
+          <div class="dashboard__metrics">
+            <MetricBox :value="1284" label="今日产量" unit="件" type="success" />
+            <MetricBox :value="3.2" label="能耗" unit="kWh" type="warning" />
+            <MetricBox :value="98.2" label="良品率" unit="%" />
+          </div>
+        </TechCard>
+      </JumpLink>
     </Sidebar>
 
     <!-- 底部状态浮条 -->
-    <div class="dashboard__bottom">
-      <div class="dashboard__bottom-left">
-        <StatusDot type="running" label="系统运行中" />
-        <DataRow label="数据延迟" value="38ms" />
-        <DataRow label="接入设备" value="186 / 200" />
+    <JumpLink to="status-dot" label="StatusDot / DataRow / ProgressBar" class="dashboard__bottom-jump">
+      <div class="dashboard__bottom">
+        <div class="dashboard__bottom-left">
+          <StatusDot type="running" label="系统运行中" />
+          <DataRow label="数据延迟" value="38ms" />
+          <DataRow label="接入设备" value="186 / 200" />
+        </div>
+        <div class="dashboard__bottom-right">
+          <CountBadge :value="99.9" type="success" /> 系统可用性
+          <ProgressBar :value="78" type="info" style="width: 160px" />
+        </div>
       </div>
-      <div class="dashboard__bottom-right">
-        <CountBadge :value="99.9" type="success" /> 系统可用性
-        <ProgressBar :value="78" type="info" style="width: 160px" />
-      </div>
-    </div>
+    </JumpLink>
   </div>
 </template>
 
@@ -240,12 +250,30 @@ const alertList = [
 }
 
 /* —— 顶部 KPI 浮条（居中浮于场景之上） —— */
-.dashboard__kpi-bar {
+/* KPI / 底部条的 JumpLink 外壳接管绝对定位，内部条改 relative。
+   这些类传给了 JumpLink 组件根元素，需用 :deep 穿透。 */
+.dashboard__kpi-jump {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
+  width: max-content;
+  max-width: calc(100% - 2 * var(--sidebar-w) - 40px);
+}
+
+.dashboard__bottom-jump {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  width: max-content;
+  max-width: calc(100% - 2 * var(--sidebar-w) - 40px);
+}
+
+.dashboard__kpi-bar {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -261,11 +289,7 @@ const alertList = [
 
 /* —— 底部状态浮条（居中浮于场景之上） —— */
 .dashboard__bottom {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
