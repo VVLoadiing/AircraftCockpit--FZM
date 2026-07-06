@@ -15,6 +15,8 @@ withDefaults(
     title?: string
     /** 是否可悬停辉光 */
     hoverable?: boolean
+    /** 是否在 flex 列里均分高度（flex: 1 1 0） */
+    fill?: boolean
     /** 内容区最小高度（如 '120px'）。内容不足时撑开到该高度 */
     minHeight?: string
     /** 内容区最大高度（如 '300px'）。超出则纵向滚动；'none' 表示不限 */
@@ -23,6 +25,7 @@ withDefaults(
   {
     title: '',
     hoverable: true,
+    fill: false,
     minHeight: '',
     maxHeight: '',
   },
@@ -30,7 +33,7 @@ withDefaults(
 </script>
 
 <template>
-  <section class="fzm-card" :class="{ 'is-hoverable': hoverable }">
+  <section class="fzm-card" :class="{ 'is-hoverable': hoverable, 'card-fill': fill }">
     <!-- 7.2 科技横幅条标题 -->
     <header v-if="title || $slots.title" class="fzm-card__title">
       <slot name="title">{{ title }}</slot>
@@ -72,6 +75,12 @@ withDefaults(
   transition:
     box-shadow 0.25s ease,
     border-color 0.25s ease;
+  min-height: 0;
+}
+
+/* 在 flex 列里均分高度 */
+.card-fill {
+  flex: 1 1 0;
   min-height: 0;
 }
 
@@ -121,6 +130,7 @@ withDefaults(
   display: flex;
   flex-direction: column;
   min-height: 0;
+  height: calc(100% - 32px);
 }
 
 /* 限制高度时纵向滚动（标题/底栏固定，仅内容区滚动） */

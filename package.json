@@ -5,7 +5,7 @@
   "description": "曜蓝机甲 Tech HUD — 面向大屏数字孪生 / 工业监控 / 智慧中台的 Vue 3 项目模板（含可发布 npm 的 UI 组件库）",
   "type": "module",
   "scripts": {
-    "dev": "pnpm --filter playground dev",
+    "dev": "pnpm --filter playground dev --host",
     "dev:docs": "pnpm --filter docs dev --host",
     "build": "pnpm --filter @fzm/ui build && pnpm --filter playground build",
     "build:ui": "pnpm --filter @fzm/ui build",

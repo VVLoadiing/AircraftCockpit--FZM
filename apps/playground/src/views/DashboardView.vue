@@ -92,15 +92,15 @@ const alertList = [
 
     <!-- 左侧栏（透明浮层） -->
     <Sidebar class="dashboard__sidebar dashboard__sidebar--left">
-      <TechCard title="实时产线趋势">
+      <TechCard title="实时产线趋势" fill>
         <div class="dashboard__chart">
-          <BaseChart :option="lineOption" height="180px" />
+          <BaseChart :option="lineOption"/>
         </div>
       </TechCard>
 
-      <TechCard title="设备状态分布">
+      <TechCard title="设备状态分布" fill>
         <div class="dashboard__chart">
-          <BaseChart :option="pieOption" height="180px" />
+          <BaseChart :option="pieOption" />
         </div>
       </TechCard>
     </Sidebar>
@@ -120,7 +120,7 @@ const alertList = [
     <Sidebar class="dashboard__sidebar dashboard__sidebar--right">
       <!-- 告警列表：限制内容区最大高度，超出滚动；标题固定不动 -->
       <JumpLink to="data-row" label="TechRow / LevelBadge">
-        <TechCard title="告警列表" max-height="220px">
+        <TechCard title="告警列表" fill>
           <TechRow v-for="(a, i) in alertList" :key="i" :active="i === 0">
             <template #prefix>
               <LevelBadge :level="a.level" />
@@ -133,14 +133,14 @@ const alertList = [
         </TechCard>
       </JumpLink>
 
-      <TechCard title="产能统计">
+      <TechCard title="产能统计" fill>
         <div class="dashboard__chart">
-          <BaseChart :option="barOption" height="170px" />
+          <BaseChart :option="barOption" />
         </div>
       </TechCard>
 
       <JumpLink to="metric-box" label="MetricBox">
-        <TechCard title="核心指标">
+        <TechCard title="核心指标" fill>
           <div class="dashboard__metrics">
             <MetricBox :value="1284" label="今日产量" unit="件" type="success" />
             <MetricBox :value="3.2" label="能耗" unit="kWh" type="warning" />
@@ -318,6 +318,8 @@ const alertList = [
 }
 
 .dashboard__chart {
+  width: 100%;
+  height: 100%;
   margin: 0 -4px;
 }
 
