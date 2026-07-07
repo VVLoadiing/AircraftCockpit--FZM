@@ -279,10 +279,8 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <!-- 底部扫光横线 -->
-    <div class="fzm-app-header__accent">
-      <div class="fzm-app-header__scan" />
-    </div>
+    <!-- 底部渐变线 -->
+    <div class="fzm-app-header__accent" />
   </header>
 </template>
 
@@ -788,11 +786,10 @@ onBeforeUnmount(() => {
   transform: translateY(-4px);
 }
 
-/* —— 底部扫光线 —— */
+/* —— 底部渐变线 —— */
 .fzm-app-header__accent {
   position: relative;
   height: 2px;
-  overflow: hidden;
   background: linear-gradient(
     90deg,
     transparent 0%,
@@ -801,24 +798,5 @@ onBeforeUnmount(() => {
     rgb(var(--primary-rgb) / 0.65) 70%,
     transparent 100%
   );
-}
-
-.fzm-app-header__scan {
-  position: absolute;
-  inset: 0;
-  width: 30%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
-  animation: fzm-header-scanline 4s ease-in-out infinite;
-}
-
-@keyframes fzm-header-scanline {
-  0%, 100% { transform: translateX(-100%); }
-  50% { transform: translateX(333%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .fzm-app-header__scan {
-    animation: none;
-  }
 }
 </style>

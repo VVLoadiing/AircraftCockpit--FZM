@@ -4,14 +4,16 @@ import { initUiStyle, HudFrame, AppHeader } from '@fzm/ui'
 import GalleryView from './views/GalleryView.vue'
 import ComponentsView from './views/ComponentsView.vue'
 import DashboardView from './views/DashboardView.vue'
+import EditModeView from './views/EditModeView.vue'
 
 // App 启动即恢复已存主题
 initUiStyle()
 
-type TabId = 'dashboard' | 'gallery' | 'components'
+type TabId = 'dashboard' | 'edit' | 'gallery' | 'components'
 
 const tabs = [
   { id: 'dashboard' as TabId, label: '大屏组装示例', desc: '组件拼装成完整项目，点击区域跳转组件' },
+  { id: 'edit' as TabId, label: '编辑模式', desc: '自由增删 TechCard 模块、选择内容样式' },
   { id: 'gallery' as TabId, label: '组件总览', desc: '按分类查看全部 30 个组件' },
   { id: 'components' as TabId, label: '组件演示', desc: '逐个查看组件外观与用法' },
 ]
@@ -22,6 +24,7 @@ const pendingAnchor = ref<string>('')
 
 const currentView = computed(() => {
   if (activeTab.value === 'dashboard') return DashboardView
+  if (activeTab.value === 'edit') return EditModeView
   if (activeTab.value === 'gallery') return GalleryView
   return ComponentsView
 })
