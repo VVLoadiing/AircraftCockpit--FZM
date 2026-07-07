@@ -1,4 +1,4 @@
-/* playground 自带：仅引入组件库令牌样式 + 基础（演示页自带 HUD Frame） */
+/* playground 自带：仅引入组件库令牌样式 */
 @import '@fzm/ui/styles';
 
 html,
@@ -6,4 +6,13 @@ body,
 #app {
   height: 100%;
   margin: 0;
+}
+
+/* 大屏布局：3D 场景全屏铺底，去掉 body 默认黑底与网格背景
+   （背景由 App.vue 的 .app__scene 全局场景层提供） */
+body {
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  overflow: hidden; /* 大屏不滚动，场景固定铺底 */
 }

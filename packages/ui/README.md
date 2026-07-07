@@ -117,7 +117,7 @@ withAlpha(palette.value.primary, 0.2) // 'rgba(8,145,178,0.2)'
 
 > ECharts 为**可选 peerDependency**，使用 `BaseChart` / 预设前需自行安装 `echarts`。
 
-## 组件清单（29 个）
+## 组件清单（30 个）
 
 ### 基础容器
 
@@ -170,6 +170,7 @@ withAlpha(palette.value.primary, 0.2) // 'rgba(8,145,178,0.2)'
 
 | 组件 | 用途 |
 |------|------|
+| `AppHeader` | 应用级机甲风头部浮条（电流母线/状态组/用户菜单·主题切换） |
 | `HudFrame` | 全屏 HUD 机甲边框 + 四角角标（8.1） |
 | `Sidebar` | 透明浮层侧栏（错峰入场，8.3） |
 

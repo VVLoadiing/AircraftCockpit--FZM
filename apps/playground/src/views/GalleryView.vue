@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
  * GalleryView — 组件分类总览
- * 按 5 类展示全部 29 个组件，每个卡片显示组件名 + 一句话描述。
+ * 按 5 类展示全部 30 个组件，每个卡片显示组件名 + 一句话描述。
  * 点击任一卡片 → 跳转到组件演示页对应锚点（高亮闪烁定位）。
  */
 import { inject, type Ref } from 'vue'
@@ -80,6 +80,7 @@ const groups: CompGroup[] = [
     title: '布局',
     icon: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z',
     items: [
+      { anchor: 'glass-panel', name: 'AppHeader', desc: '应用级机甲风头部浮条' },
       { anchor: 'glass-panel', name: 'HudFrame', desc: '全屏 HUD 机甲边框' },
       { anchor: 'glass-panel', name: 'Sidebar', desc: '透明浮层侧栏' },
     ],
@@ -94,7 +95,7 @@ const activeTab = inject<Ref<string>>('activeTab')
     <!-- 顶部说明 -->
     <div class="gallery__intro">
       <h2 class="gallery__title">组件总览</h2>
-      <p class="gallery__subtitle">共 29 个组件，按 5 类组织。点击任一组件卡片可跳转到演示页查看用法。</p>
+      <p class="gallery__subtitle">共 30 个组件，按 5 类组织。点击任一组件卡片可跳转到演示页查看用法。</p>
     </div>
 
     <!-- 分类墙 -->

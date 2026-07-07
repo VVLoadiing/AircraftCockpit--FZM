@@ -44,6 +44,8 @@ import LoadingSpinner from './components/LoadingSpinner'
 import CountUp from './components/CountUp'
 import TechDivider from './components/TechDivider'
 import TechAvatar from './components/TechAvatar'
+// 布局 / 应用级
+import AppHeader from './components/AppHeader'
 
 // —— Composables ——
 export { useUiTheme, setUiStyle, initUiStyle, uiStyle, currentUiStyle } from './composables/useUiTheme'
@@ -104,6 +106,8 @@ export {
   CountUp,
   TechDivider,
   TechAvatar,
+  // 布局 / 应用级
+  AppHeader,
 }
 
 /** 全部组件清单（用于全量注册） */
@@ -142,6 +146,8 @@ const components = {
   CountUp,
   TechDivider,
   TechAvatar,
+  // 布局 / 应用级
+  AppHeader,
 }
 
 /** Vue 插件：app.use(FzmUI) 全量注册 */

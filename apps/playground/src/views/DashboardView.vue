@@ -81,16 +81,7 @@ const alertList = [
 
 <template>
   <div class="dashboard">
-    <!-- 3D 场景全屏铺底（实际项目中放数字孪生 / 三维模型，UI 以浮层叠加其上） -->
-    <div class="dashboard__scene">
-      <div class="dashboard__scene-grid" />
-      <div class="dashboard__scene-hint">
-        <span>3D 场景占位 · 全屏铺底</span>
-        <small>实际项目中此处放数字孪生 / 三维模型，UI 以浮层形式叠加其上</small>
-      </div>
-    </div>
-
-    <!-- 左侧栏（透明浮层） -->
+    <!-- 左侧栏（透明浮层，贴左边铺满高度） -->
     <Sidebar class="dashboard__sidebar dashboard__sidebar--left">
       <TechCard title="实时产线趋势" fill>
         <div class="dashboard__chart">
@@ -170,75 +161,35 @@ const alertList = [
 <style scoped>
 /*
  * 布局原则（对应设计文档第 8.2 节）：
- * 3D 场景全屏铺底，所有 UI（左右侧栏 / KPI 浮条 / 底部状态条）
- * 以绝对定位的毛玻璃浮层形式叠加其上。
+ * 3D 场景已在 App.vue 全屏铺底，本视图只负责侧栏 / KPI / 底部浮层。
+ * 所有浮层用 fixed 定位贴视口边缘，叠加在场景之上。
  */
 .dashboard {
-  position: relative;
-  height: 100%;
-  min-height: 540px;
-  overflow: hidden;
-}
-
-/* —— 3D 场景全屏铺底 —— */
-.dashboard__scene {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 50% 45%, rgba(80, 140, 160, 0.14), transparent 62%),
-    radial-gradient(circle at 50% 100%, rgba(80, 140, 160, 0.08), transparent 50%),
-    var(--bg-scene);
+  z-index: 10;
+  pointer-events: none; /* 容器不拦截场景交互，子元素各自启用 */
 }
 
-.dashboard__scene-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(5, 30, 54, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(5, 30, 54, 0.08) 1px, transparent 1px);
-  background-size: 28px 28px;
+.dashboard > * {
+  pointer-events: auto;
 }
 
-.dashboard__scene-hint {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  color: #2a4a5e;
-  pointer-events: none;
-}
-
-.dashboard__scene-hint span {
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 2px;
-}
-
-.dashboard__scene-hint small {
-  font-size: 10px;
-  opacity: 0.7;
-}
-
-/* —— 左右侧栏（透明浮层，贴边铺满高度） —— */
+/* —— 左右侧栏（透明浮层，贴边铺满高度，留出顶部 header 空间） —— */
 .dashboard__sidebar--left,
 .dashboard__sidebar--right {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 2;
+  position: fixed;
+  top: calc(10px + var(--header-h) + 50px);
+  bottom: 60px;
+  z-index: 12;
 }
 
 .dashboard__sidebar--left {
-  left: 0;
+  left: 10px;
 }
 
 .dashboard__sidebar--right {
-  right: 0;
+  right: 10px;
 }
 
 /* 侧栏内容超出时纵向滚动（穿透到 Sidebar 组件） */
@@ -249,25 +200,23 @@ const alertList = [
   overflow-x: hidden;
 }
 
-/* —— 顶部 KPI 浮条（居中浮于场景之上） —— */
-/* KPI / 底部条的 JumpLink 外壳接管绝对定位，内部条改 relative。
-   这些类传给了 JumpLink 组件根元素，需用 :deep 穿透。 */
+/* —— 顶部 KPI 浮条（居中浮于场景之上，在 header 下方） —— */
 .dashboard__kpi-jump {
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: calc(10px + var(--header-h) + 50px);
   left: 50%;
   transform: translateX(-50%);
-  z-index: 3;
+  z-index: 12;
   width: max-content;
   max-width: calc(100% - 2 * var(--sidebar-w) - 40px);
 }
 
 .dashboard__bottom-jump {
-  position: absolute;
-  bottom: 0;
+  position: fixed;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 3;
+  z-index: 12;
   width: max-content;
   max-width: calc(100% - 2 * var(--sidebar-w) - 40px);
 }

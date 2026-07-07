@@ -35,7 +35,7 @@ withDefaults(
 .fzm-hud-frame {
   position: fixed;
   inset: 6px;
-  z-index: 60;
+  z-index: 5;
   pointer-events: none;
   border: 1px solid rgb(var(--primary-rgb) / 0.22);
   clip-path: polygon(

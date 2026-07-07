@@ -85,6 +85,7 @@ export default defineConfig({
         {
           text: '布局',
           items: [
+            { text: 'AppHeader 应用头部', link: '/components/app-header' },
             { text: 'HudFrame HUD 边框', link: '/components/hud-frame' },
             { text: 'Sidebar 侧栏', link: '/components/sidebar' },
           ],

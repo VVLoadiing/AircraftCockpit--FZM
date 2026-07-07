@@ -32,6 +32,9 @@ import {
   CountUp,
   TechDivider,
   TechAvatar,
+  // 主题下拉演示
+  useUiTheme,
+  UI_STYLE_OPTIONS,
 } from '@fzm/ui'
 
 // App 传入的待跳转锚点（点击大屏/总览组件名后触发）
@@ -63,6 +66,18 @@ const tabValue = ref('overview')
 const segValue = ref('day')
 const iconToggle = ref('card')
 const tags = ref(['产线A', 'A区', '高温'])
+
+// 主题下拉演示（带彩色圆点 + 名称 + 描述）
+const { style: themeStyle, setStyle } = useUiTheme()
+const themeSelectOptions = UI_STYLE_OPTIONS.map((o) => ({
+  label: o.name,
+  value: o.id,
+  color: o.color,
+  desc: o.desc,
+}))
+function dotStyle(color: unknown) {
+  return color ? { background: String(color) } : undefined
+}
 </script>
 
 <template>
@@ -212,6 +227,30 @@ const tags = ref(['产线A', 'A区', '高温'])
           ]"
         />
 
+        <!-- 主题下拉（彩色圆点 + 名称 + 描述，展示 TechSelect 插槽能力） -->
+        <div class="components-view__field">
+          <label class="components-view__field-label">主题切换下拉（插槽自定义）</label>
+          <TechSelect
+            :model-value="themeStyle"
+            :options="themeSelectOptions"
+            @change="(v: string | number) => setStyle(v as any)"
+          >
+            <template #trigger="{ label }">
+              <span style="display: inline-flex; align-items: center; gap: 7px">
+                <span class="theme-dot" :style="dotStyle(UI_STYLE_OPTIONS.find((o) => o.id === themeStyle)?.color)" />
+                <span>{{ label || '选择主题' }}</span>
+              </span>
+            </template>
+            <template #option="{ option }">
+              <span style="display: flex; align-items: center; gap: 7px; width: 100%">
+                <span class="theme-dot" :style="dotStyle(option.color)" />
+                <b style="font-weight: 600">{{ option.label }}</b>
+                <small style="margin-left: auto; opacity: 0.6; font-size: 10px">{{ option.desc }}</small>
+              </span>
+            </template>
+          </TechSelect>
+        </div>
+
         <div style="display: flex; align-items: center; gap: 16px">
           <span style="font-size: 11px; color: var(--text-secondary)">自动模式</span>
           <TechSwitch v-model="switchVal" />
@@ -345,5 +384,27 @@ const tags = ref(['产线A', 'A区', '高温'])
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   width: 100%;
+}
+
+/* 主题下拉演示 */
+.components-view__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.components-view__field-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+.theme-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 </style>
