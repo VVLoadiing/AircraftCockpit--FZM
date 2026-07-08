@@ -6,8 +6,11 @@
 import { computed } from 'vue'
 
 interface SegItem {
+  /** 选项值（v-model 绑定值） */
   value: string | number
+  /** 显示文字 */
   label: string
+  /** 是否禁用 */
   disabled?: boolean
 }
 

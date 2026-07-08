@@ -43,6 +43,7 @@ withDefaults(
   position: relative;
 }
 
+/* —— 宽度变体：normal 走基础 --sidebar-w，narrow/wide 覆盖为定值 —— */
 .fzm-sidebar.is-narrow {
   width: 300px;
 }
@@ -51,38 +52,21 @@ withDefaults(
   width: 340px;
 }
 
-/* 直接子元素错峰入场动画（最多支持 8 个，超出不再错峰但仍有动画） */
+/*
+ * 直接子元素错峰入场动画。
+ * CSS 无法循环，故手写 8 档 delay（每档 +0.06s）；超出第 8 个不再错峰但仍播放动画。
+ * 紧凑单行写法以降低样板噪音。
+ */
 .fzm-sidebar > :deep(*) {
   animation: fzm-sidebar-fadeIn 0.45s ease both;
 }
-
-.fzm-sidebar > :deep(*:nth-child(2)) {
-  animation-delay: 0.06s;
-}
-
-.fzm-sidebar > :deep(*:nth-child(3)) {
-  animation-delay: 0.12s;
-}
-
-.fzm-sidebar > :deep(*:nth-child(4)) {
-  animation-delay: 0.18s;
-}
-
-.fzm-sidebar > :deep(*:nth-child(5)) {
-  animation-delay: 0.24s;
-}
-
-.fzm-sidebar > :deep(*:nth-child(6)) {
-  animation-delay: 0.3s;
-}
-
-.fzm-sidebar > :deep(*:nth-child(7)) {
-  animation-delay: 0.36s;
-}
-
-.fzm-sidebar > :deep(*:nth-child(8)) {
-  animation-delay: 0.42s;
-}
+.fzm-sidebar > :deep(*:nth-child(2)) { animation-delay: 0.06s; }
+.fzm-sidebar > :deep(*:nth-child(3)) { animation-delay: 0.12s; }
+.fzm-sidebar > :deep(*:nth-child(4)) { animation-delay: 0.18s; }
+.fzm-sidebar > :deep(*:nth-child(5)) { animation-delay: 0.24s; }
+.fzm-sidebar > :deep(*:nth-child(6)) { animation-delay: 0.3s; }
+.fzm-sidebar > :deep(*:nth-child(7)) { animation-delay: 0.36s; }
+.fzm-sidebar > :deep(*:nth-child(8)) { animation-delay: 0.42s; }
 
 @keyframes fzm-sidebar-fadeIn {
   from {

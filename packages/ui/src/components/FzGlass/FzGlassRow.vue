@@ -23,6 +23,7 @@ defineProps<{
 </template>
 
 <style scoped>
+/* 数据行：弱底色 + 弱描边的圆角条，键值两端对齐 */
 .fzm-fz-row {
   display: flex;
   justify-content: space-between;
@@ -35,6 +36,7 @@ defineProps<{
   border: 1px solid rgb(var(--primary-rgb) / 0.1);
 }
 
+/* 值：等宽数字 + 高亮，便于在深底上读数 */
 .fzm-fz-row__value {
   font-family: var(--font-mono);
   font-weight: 700;

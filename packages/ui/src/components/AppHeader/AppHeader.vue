@@ -57,7 +57,9 @@ const props = withDefaults(
 )
 
 const emit = defineEmits<{
+  /** 点击告警铃铛时触发 */
   (e: 'alarm-click'): void
+  /** 切换主题时触发，载荷为主题 id */
   (e: 'theme-change', value: UiStyleOption['id']): void
 }>()
 
@@ -181,9 +183,8 @@ onBeforeUnmount(() => {
           <span class="fzm-app-header__status-text">{{ systemStatus }}</span>
         </div>
 
-        <!-- 告警铃铛（文档：30×30 圆角按钮 + 药丸红徽标） -->
+        <!-- 告警铃铛（文档：30×30 圆角按钮 + 药丸红徽标）；铃铛常驻，徽标仅在有告警时显示 -->
         <button
-          v-if="alarmCount !== undefined"
           type="button"
           class="fzm-app-header__bell"
           aria-label="告警通知"
@@ -465,9 +466,11 @@ onBeforeUnmount(() => {
   to { transform: translateY(-50%) rotate(405deg); }
 }
 
+/* 用户偏好减少动效时，关闭所有装饰性动画 */
 @media (prefers-reduced-motion: reduce) {
   .fzm-app-header__pulse,
-  .fzm-app-header__spacer::after {
+  .fzm-app-header__spacer::after,
+  .fzm-app-header__sys-dot {
     animation: none;
   }
 }
@@ -536,10 +539,6 @@ onBeforeUnmount(() => {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .fzm-app-header__sys-dot { animation: none; }
-}
-
 .fzm-app-header__status-text {
   font-size: 11px;
   font-weight: 500;
@@ -567,7 +566,7 @@ onBeforeUnmount(() => {
   border-color: rgb(var(--primary-rgb) / 0.45);
 }
 
-/* 铃铛徽标（文档：药丸形，红 #d87878 渐变 + 红投影） */
+/* 铃铛徽标（文档：药丸形，主题危险色 + 红投影） */
 .fzm-app-header__bell-badge {
   position: absolute;
   top: -6px;
@@ -576,14 +575,14 @@ onBeforeUnmount(() => {
   height: 16px;
   padding: 0 4px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #d87878, #d87878);
+  background: var(--danger);
   color: #fff;
   font-size: 9px;
   font-weight: 800;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.55);
+  box-shadow: 0 2px 8px rgb(var(--danger-rgb) / 0.55);
 }
 
 /* 时间（文档：tabular-nums 等宽数字，不抖动） */

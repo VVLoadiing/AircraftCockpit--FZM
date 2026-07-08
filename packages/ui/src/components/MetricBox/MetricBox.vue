@@ -101,9 +101,15 @@ withDefaults(
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
 }
 
+/* —— 语义色：数字主色随 type 变化（info 复用 primary 色） —— */
 .fzm-metric.is-success .fzm-metric__value {
   color: var(--success-light);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85), 0 0 12px rgb(var(--success-rgb) / 0.5);
+}
+
+.fzm-metric.is-info .fzm-metric__value {
+  color: var(--primary);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85), 0 0 12px rgb(var(--primary-rgb) / 0.5);
 }
 
 .fzm-metric.is-warning .fzm-metric__value {

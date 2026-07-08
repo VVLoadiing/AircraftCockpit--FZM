@@ -8,6 +8,7 @@ import type { SemanticType } from '../../types'
 
 withDefaults(
   defineProps<{
+    /** 着色（空串为默认态，否则按语义色高亮） */
     type?: '' | SemanticType
   }>(),
   {

@@ -7,8 +7,8 @@
   "scripts": {
     "dev": "pnpm --filter playground dev --host",
     "dev:docs": "pnpm --filter docs dev --host",
-    "build": "pnpm --filter @fzm/ui build && pnpm --filter playground build",
-    "build:ui": "pnpm --filter @fzm/ui build",
+    "build": "pnpm --filter fzm-tech-hud-ui build && pnpm --filter playground build",
+    "build:ui": "pnpm --filter fzm-tech-hud-ui build",
     "build:docs": "pnpm --filter docs build",
     "preview": "pnpm --filter playground preview",
     "clean": "pnpm -r exec rimraf dist node_modules"

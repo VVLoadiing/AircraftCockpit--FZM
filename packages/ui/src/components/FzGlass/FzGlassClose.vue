@@ -4,6 +4,7 @@
  * 来源：UI设计系统规范.md 第 7.5 节（.fz-close）
  */
 defineEmits<{
+  /** 点击关闭按钮时触发（由父级浮窗监听以关闭自身） */
   (e: 'close'): void
 }>()
 </script>
@@ -17,6 +18,7 @@ defineEmits<{
 </template>
 
 <style scoped>
+/* 关闭按钮：弱化的小方块，hover 时变红提示危险操作 */
 .fzm-fz-close {
   width: 22px;
   height: 22px;
@@ -35,7 +37,7 @@ defineEmits<{
 
 .fzm-fz-close:hover {
   color: #fff;
-  background: rgba(239, 68, 68, 0.28);
-  border-color: rgba(239, 68, 68, 0.55);
+  background: rgb(var(--danger-rgb) / 0.28);
+  border-color: rgb(var(--danger-rgb) / 0.55);
 }
 </style>

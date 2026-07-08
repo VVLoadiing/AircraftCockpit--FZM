@@ -76,6 +76,12 @@ const percent = computed(() => {
   transition: width 0.4s ease;
 }
 
+/* —— 语义色填充（info 复用主色渐变，与默认态一致） —— */
+.fzm-progress__fill.is-info {
+  background: var(--primary-gradient);
+  box-shadow: 0 0 8px rgb(var(--primary-rgb) / 0.6);
+}
+
 .fzm-progress__fill.is-success {
   background: linear-gradient(135deg, var(--success), var(--success-light));
   box-shadow: 0 0 8px rgb(var(--success-rgb) / 0.6);

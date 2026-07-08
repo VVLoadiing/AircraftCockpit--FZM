@@ -129,11 +129,28 @@ const groups: CompGroup[] = [
 </template>
 
 <style scoped>
+/*
+ * 滚动容器：playground 全局 body { overflow: hidden }（大屏不滚动），
+ * 故本视图自管滚动 —— fixed 占满 header/subnav 下方区域，纵向滚动。
+ * 与 ComponentsView 采用同一模式。
+ */
 .gallery {
+  position: fixed;
+  top: calc(10px + var(--header-h) + 50px);
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding-bottom: 24px;
+  padding-right: 4px; /* 给滚动条留隙 */
+}
+
+/* fixed+overflow 容器里禁止 flex 压缩分组，避免内容被截断 */
+.gallery__group {
+  flex: none;
 }
 
 .gallery__intro {

@@ -352,15 +352,28 @@ function dotStyle(color: unknown) {
 </template>
 
 <style scoped>
+/*
+ * 滚动容器：playground 全局 body { overflow: hidden }（大屏不滚动），
+ * 故本视图自管滚动 —— fixed 占满 header/subnav 下方区域，纵向滚动。
+ * 与 GalleryView 采用同一模式。
+ */
 .components-view {
+  position: fixed;
+  top: calc(10px + var(--header-h) + 50px);
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  padding-bottom: 20px;
+  padding-right: 4px; /* 给滚动条留隙，避免遮挡内容 */
 }
 
 .components-view__block {
   width: 100%;
+  flex: none; /* 关键：固定定位+overflow 容器里，禁止 flex 压缩卡片高度，否则 TechCard 的 __body calc(100%-32px) 会塌陷 */
   /* 锚点定位时留出顶部空间，避免被浮条遮挡 */
   scroll-margin-top: 16px;
   transition: box-shadow 0.3s ease, outline-color 0.3s ease;

@@ -91,6 +91,7 @@ withDefaults(
   color: var(--text-on-primary);
 }
 
+/* —— 语义色变体：描边 + 文字主色，hover 时对应辉光 —— */
 .fzm-hud-btn.is-success {
   border-color: rgb(var(--success-rgb) / 0.55);
   color: var(--success-light);
@@ -118,6 +119,7 @@ withDefaults(
   box-shadow: var(--shadow-glow-danger), inset 0 0 16px rgb(var(--danger-rgb) / 0.2);
 }
 
+/* info：仅改描边（复用 primary），颜色保持默认 */
 .fzm-hud-btn.is-info {
   border-color: rgb(var(--primary-rgb) / 0.55);
 }

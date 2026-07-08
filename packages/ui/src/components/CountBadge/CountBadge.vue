@@ -50,6 +50,7 @@ withDefaults(
   letter-spacing: 0.5px;
 }
 
+/* —— 语义色变体：数字主色 + 弱底/描边高亮 —— */
 .fzm-count-badge.is-success {
   color: var(--success-light);
   background: rgb(var(--success-rgb) / 0.18);
@@ -68,6 +69,7 @@ withDefaults(
   border-color: rgb(var(--danger-rgb) / 0.5);
 }
 
+/* info 仅改主色（复用 primary，弱提示，不加底/边） */
 .fzm-count-badge.is-info {
   color: var(--primary-lighter);
 }
