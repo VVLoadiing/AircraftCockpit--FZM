@@ -11,16 +11,14 @@
  * 点击遮罩 / Esc / 关闭按钮 → emit('close')。
  * 字段即时双向同步到父级（@update-* 事件），父级再写回 layout。
  */
-import { watch } from 'vue'
+import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { FzGlass, FzGlassTitle, FzGlassClose, TechInput, TechSelect, HudButton } from '@fzm/ui'
-import { CONTENT_TYPES, type EditableCard, type ContentType } from '../../composables/useEditLayout'
-
-/** TechSelect 的 options 项（@fzm/ui 未导出类型，按其内部结构定义） */
-interface SelectOption {
-  label: string
-  value: string | number
-  [key: string]: unknown
-}
+import {
+  CONTENT_TYPES,
+  type EditableCard,
+  type ContentType,
+  type SelectOption,
+} from '../../composables/useEditLayout'
 
 const props = defineProps<{
   card: EditableCard
@@ -40,7 +38,6 @@ const typeOptions: SelectOption[] = CONTENT_TYPES.map((c) => ({
 }))
 
 /* —— 宽高本地草稿（输入时即时预览，避免每敲一个字就触发 emit 抖动） —— */
-import { ref } from 'vue'
 const widthDraft = ref(props.card.width ?? '')
 const heightDraft = ref(props.card.height ?? '')
 
@@ -82,16 +79,20 @@ function onTitleInput(val: string | number) {
 function onMaskClick() {
   emit('close')
 }
+
+/* Esc 关闭：挂在 window 上（弹窗内元素可能无焦点，挂在 mask div 不可靠） */
 function onKeydown(e: KeyboardEvent) {
   if (e.key === 'Escape') emit('close')
 }
+onMounted(() => window.addEventListener('keydown', onKeydown))
+onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
 </script>
 
 <template>
   <!-- Teleport 到 body：逃出 TechCard 的 clip-path，使弹窗真正浮在最外层 -->
   <Teleport to="body">
-    <!-- 遮罩层（点击关闭） -->
-    <div class="settings-mask" @click.self="onMaskClick" @keydown="onKeydown">
+    <!-- 遮罩层（点击关闭；Esc 由 window 监听处理） -->
+    <div class="settings-mask" @click.self="onMaskClick">
     <FzGlass tag="section" class="settings-panel" role="dialog" aria-modal="true">
       <!-- 标题条 -->
       <FzGlassTitle title="卡片设置" />

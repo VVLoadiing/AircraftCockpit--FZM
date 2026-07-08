@@ -1,7 +1,14 @@
 <script setup lang="ts">
+/**
+ * ComponentsView — 组件演示
+ * 逐个组件的可交互 demo，每个 demo 卡片带 id（comp-xxx）供跳转定位。
+ * 从大屏 / 总览页点组件名后，App 设置 pendingAnchor，本视图 watch 到即滚动
+ * 定位 + 高亮闪烁，并 emit('consumed') 通知 App 清空锚点（避免同锚点二次跳转失效）。
+ */
 import { ref, watch, nextTick } from 'vue'
 import {
   TechCard,
+  BaseChart,
   GlassPanel,
   FzGlass,
   FzGlassTitle,
@@ -36,6 +43,7 @@ import {
   useUiTheme,
   UI_STYLE_OPTIONS,
 } from '@fzm/ui'
+import { useChartMocks } from '../composables/useChartMocks'
 
 // App 传入的待跳转锚点（点击大屏/总览组件名后触发）
 const props = defineProps<{ pendingAnchor?: string }>()
@@ -65,7 +73,9 @@ const switchVal = ref(true)
 const tabValue = ref('overview')
 const segValue = ref('day')
 const iconToggle = ref('card')
-const tags = ref(['产线A', 'A区', '高温'])
+
+// 图表 demo 数据（来自公共 mock）
+const { lineOption, barOption, pieOption } = useChartMocks()
 
 // 主题下拉演示（带彩色圆点 + 名称 + 描述）
 const { style: themeStyle, setStyle } = useUiTheme()
@@ -207,6 +217,15 @@ function dotStyle(color: unknown) {
       </div>
     </TechCard>
 
+    <!-- ============ 图表封装 ============ -->
+    <TechCard id="comp-base-chart" title="BaseChart · ECharts 自适应封装" class="components-view__block">
+      <div class="components-view__demo components-view__three-col">
+        <div class="components-view__chart"><BaseChart :option="lineOption" /></div>
+        <div class="components-view__chart"><BaseChart :option="barOption" /></div>
+        <div class="components-view__chart"><BaseChart :option="pieOption" /></div>
+      </div>
+    </TechCard>
+
     <!-- ============ 新增：输入交互 ============ -->
     <TechCard id="comp-tech-input" title="TechInput / TechSelect / TechSwitch · 输入交互" class="components-view__block">
       <div class="components-view__demo" style="flex-direction: column; align-items: stretch; max-width: 320px; gap: 12px">
@@ -302,7 +321,7 @@ function dotStyle(color: unknown) {
         <TechTag>默认</TechTag>
         <TechTag type="success">运行中</TechTag>
         <TechTag type="warning">预警</TechTag>
-        <TechTag type="danger" closable @close="tags.splice(0, 1)">可关闭</TechTag>
+        <TechTag type="danger" closable>可关闭</TechTag>
       </div>
 
       <TechDivider>分割线</TechDivider>
@@ -384,6 +403,18 @@ function dotStyle(color: unknown) {
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   width: 100%;
+}
+
+/* 图表 demo：三列等宽，每张固定高度 */
+.components-view__three-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+.components-view__chart {
+  height: 160px;
 }
 
 /* 主题下拉演示 */

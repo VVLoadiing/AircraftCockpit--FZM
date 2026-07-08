@@ -43,6 +43,9 @@ body {
 
 * {
   box-sizing: border-box;
+  /* Firefox 滚动条（统一深色科技风；Webkit 滚动条见下方 ::-webkit-scrollbar） */
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--primary-rgb) / 0.45) rgba(255, 255, 255, 0.04);
 }
 
 /* -----------------------------------------------------------
@@ -66,15 +69,10 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg,
-      rgb(var(--primary-rgb) / 0.70),
-      rgb(var(--accent-rgb) / 0.70));
+      rgb(var(--primary-rgb) / 0.7),
+      rgb(var(--accent-rgb) / 0.7));
 }
 
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgb(var(--primary-rgb) / 0.45) rgba(255, 255, 255, 0.04);
-}
 
 /* -----------------------------------------------------------
  * 11.3 极透底可读性补偿（全局规则）

@@ -266,15 +266,12 @@
   --success: #059669;
   --success-rgb: 5, 150, 105;
   --success-light: #10b981;
-  --success-bg: rgba(5, 150, 105, 0.12);
   --warning: #d97706;
   --warning-rgb: 217, 119, 6;
   --warning-light: #f59e0b;
-  --warning-bg: rgba(217, 119, 6, 0.12);
   --danger: #dc2626;
   --danger-rgb: 220, 38, 38;
   --danger-light: #ef4444;
-  --danger-bg: rgba(220, 38, 38, 0.1);
   --status-running-rgb: 5, 150, 105;
 
   /* 表面层：浅灰白底 + 白色半透卡片 */
@@ -284,7 +281,6 @@
   --bg-elevated: rgba(255, 255, 255, 0.99);
   --bg-scene: #dfeaf6;
   --bg-hover: rgb(var(--primary-rgb) / 0.08);
-  --bg-row: rgb(var(--primary-rgb) / 0.04);
 
   /* 文字（深色） */
   --text-primary: #1a2b3a;
@@ -298,11 +294,6 @@
   --border-strong: rgb(var(--primary-rgb) / 0.4);
 
   /* 阴影：浅投影（深色主题的深投影在白底上会发脏） */
-  --shadow-xs: 0 1px 2px rgba(20, 40, 60, 0.06);
-  --shadow-sm: 0 2px 6px rgba(20, 40, 60, 0.08);
-  --shadow-md: 0 6px 16px rgba(20, 40, 60, 0.1);
-  --shadow-lg: 0 12px 32px rgba(20, 40, 60, 0.12);
-  --shadow-xl: 0 20px 48px rgba(20, 40, 60, 0.14);
   --shadow-card: 0 6px 18px rgba(20, 40, 60, 0.08), inset 0 0 20px rgb(var(--primary-rgb) / 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
   --shadow-card-hover: 0 12px 28px rgba(20, 40, 60, 0.12), 0 0 18px rgb(var(--primary-rgb) / 0.16), inset 0 0 24px rgb(var(--primary-rgb) / 0.06);
   --shadow-primary: 0 4px 14px rgb(var(--accent-rgb) / 0.25);
@@ -322,9 +313,7 @@
   --glass-blur: blur(20px) saturate(1.1);
   --glass-blur-strong: blur(24px) saturate(1.15);
   --glass-border: 1px solid rgb(var(--primary-rgb) / 0.18);
-  --glass-inset: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
   --glass-shadow: 0 12px 32px rgba(20, 40, 60, 0.1), 0 2px 6px rgba(20, 40, 60, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.7);
-  --glass-shadow-hover: 0 18px 42px rgba(20, 40, 60, 0.14), 0 4px 10px rgba(20, 40, 60, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 
   /* 图表（深色文字/轴线，适配白底；配色仍鲜艳） */
   --chart-axis: rgba(90, 112, 136, 0.45);
@@ -352,15 +341,12 @@
   --success: #059669;
   --success-rgb: 5, 150, 105;
   --success-light: #10b981;
-  --success-bg: rgba(5, 150, 105, 0.12);
   --warning: #d97706;
   --warning-rgb: 217, 119, 6;
   --warning-light: #f59e0b;
-  --warning-bg: rgba(217, 119, 6, 0.12);
   --danger: #dc2626;
   --danger-rgb: 220, 38, 38;
   --danger-light: #ef4444;
-  --danger-bg: rgba(220, 38, 38, 0.1);
   --status-running-rgb: 5, 150, 105;
 
   /* 表面层：偏暖的白底（带一丝绿调，与主色调和） */
@@ -370,7 +356,6 @@
   --bg-elevated: rgba(255, 255, 255, 0.99);
   --bg-scene: #dff0e8;
   --bg-hover: rgb(var(--primary-rgb) / 0.08);
-  --bg-row: rgb(var(--primary-rgb) / 0.04);
 
   --text-primary: #142a22;
   --text-secondary: #4a6356;
@@ -381,11 +366,6 @@
   --border-light: rgb(var(--primary-rgb) / 0.14);
   --border-strong: rgb(var(--primary-rgb) / 0.4);
 
-  --shadow-xs: 0 1px 2px rgba(20, 50, 35, 0.06);
-  --shadow-sm: 0 2px 6px rgba(20, 50, 35, 0.08);
-  --shadow-md: 0 6px 16px rgba(20, 50, 35, 0.1);
-  --shadow-lg: 0 12px 32px rgba(20, 50, 35, 0.12);
-  --shadow-xl: 0 20px 48px rgba(20, 50, 35, 0.14);
   --shadow-card: 0 6px 18px rgba(20, 50, 35, 0.08), inset 0 0 20px rgb(var(--primary-rgb) / 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
   --shadow-card-hover: 0 12px 28px rgba(20, 50, 35, 0.12), 0 0 18px rgb(var(--primary-rgb) / 0.16), inset 0 0 24px rgb(var(--primary-rgb) / 0.06);
   --shadow-primary: 0 4px 14px rgb(var(--accent-rgb) / 0.25);
@@ -404,9 +384,7 @@
   --glass-blur: blur(20px) saturate(1.1);
   --glass-blur-strong: blur(24px) saturate(1.15);
   --glass-border: 1px solid rgb(var(--primary-rgb) / 0.18);
-  --glass-inset: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
   --glass-shadow: 0 12px 32px rgba(20, 50, 35, 0.1), 0 2px 6px rgba(20, 50, 35, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.7);
-  --glass-shadow-hover: 0 18px 42px rgba(20, 50, 35, 0.14), 0 4px 10px rgba(20, 50, 35, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 
   --chart-axis: rgba(74, 99, 86, 0.45);
   --chart-label: #142a22;

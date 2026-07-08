@@ -3,16 +3,10 @@
  * CardRenderer — 按 contentType 渲染卡片内部内容
  *
  * 接收一个 contentType，输出对应的预置 mock 内容（图表 / 数值 / 列表）。
- * 图表沿用 DashboardView 的模式：useChartPalette + computed 包 buildXxxChart，
- * 喂给 BaseChart。
+ * 图表与列表数据统一来自 useChartMocks（与 DashboardView 共用，避免重复）。
  */
-import { computed } from 'vue'
 import {
   BaseChart,
-  useChartPalette,
-  buildLineChart,
-  buildBarChart,
-  buildPieChart,
   KpiItem,
   CountUp,
   MetricBox,
@@ -21,68 +15,15 @@ import {
   LevelBadge,
   ProgressBar,
 } from '@fzm/ui'
-import type { EChartsOption } from 'echarts'
 import type { ContentType } from '../../composables/useEditLayout'
+import { useChartMocks, alertList, dataRows } from '../../composables/useChartMocks'
 
 const props = defineProps<{
   contentType: ContentType
 }>()
 
-const { palette } = useChartPalette()
-
-/* —— 图表 option（沿用 DashboardView 现成模式，预置 mock 数据） —— */
-const lineOption = computed<EChartsOption>(
-  () =>
-    buildLineChart({
-      palette: palette.value,
-      categories: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'],
-      series: [
-        { name: '产线A', data: [320, 432, 501, 634, 790, 930, 820] },
-        { name: '产线B', data: [220, 282, 391, 434, 590, 530, 420] },
-      ],
-      unit: '件',
-    }) as EChartsOption,
-)
-
-const barOption = computed<EChartsOption>(
-  () =>
-    buildBarChart({
-      palette: palette.value,
-      categories: ['一', '二', '三', '四', '五', '六', '日'],
-      series: [{ data: [120, 200, 150, 80, 70, 110, 130] }],
-      unit: '件',
-    }) as EChartsOption,
-)
-
-const pieOption = computed<EChartsOption>(
-  () =>
-    buildPieChart({
-      palette: palette.value,
-      centerLabel: '设备总数',
-      centerUnit: '台',
-      data: [
-        { name: '正常', value: 1048, color: palette.value.success },
-        { name: '告警', value: 335, color: palette.value.warning },
-        { name: '故障', value: 124, color: palette.value.danger },
-        { name: '离线', value: 187, color: '#64748b' },
-      ],
-    }) as EChartsOption,
-)
-
-/* —— 列表类 mock —— */
-const dataRows = [
-  { label: '数据延迟', value: '38ms' },
-  { label: '接入设备', value: '186 / 200' },
-  { label: '今日产量', value: '1284 件' },
-  { label: '综合效率', value: '94.6%' },
-]
-
-const alertList = [
-  { level: 'high' as const, text: '3#注塑机 温度超限 92℃', time: '12:04' },
-  { level: 'mid' as const, text: 'B 区冷却水压偏低', time: '12:01' },
-  { level: 'low' as const, text: '7#传送带 计划维护', time: '11:58' },
-  { level: 'mid' as const, text: '5#机械臂 振动异常', time: '11:28' },
-]
+/* —— 图表 option（来自公共 mock，切主题自动联动配色） —— */
+const { lineOption, barOption, pieOption } = useChartMocks()
 </script>
 
 <template>

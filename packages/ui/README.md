@@ -119,6 +119,8 @@ withAlpha(palette.value.primary, 0.2) // 'rgba(8,145,178,0.2)'
 
 ## 组件清单（30 个）
 
+> **计数说明**：共 30 个组件，其中 `FzGlass` 携 3 个配套子组件（`FzGlassTitle` / `FzGlassRow` / `FzGlassClose`），下表合并展示，故表行数 ≠ 30。
+
 ### 基础容器
 
 | 组件 | 用途 | 对应文档章节 |

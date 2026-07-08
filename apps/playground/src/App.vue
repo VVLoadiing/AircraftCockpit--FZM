@@ -90,7 +90,8 @@ provide('activeTab', activeTab)
 
   <!-- 主体内容区（透明浮层，承载各视图） -->
   <main class="app__main">
-    <component :is="currentView" :pending-anchor="pendingAnchor" />
+    <!-- @consumed：ComponentsView 跳转锚点后回调清空 pendingAnchor，否则同锚点二次跳转失效 -->
+    <component :is="currentView" :pending-anchor="pendingAnchor" @consumed="pendingAnchor = ''" />
   </main>
 </template>
 

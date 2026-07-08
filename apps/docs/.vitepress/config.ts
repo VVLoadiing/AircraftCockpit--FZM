@@ -30,6 +30,7 @@ export default defineConfig({
             { text: '主题系统', link: '/guide/theming' },
             { text: 'ECharts 图表适配', link: '/guide/charts' },
             { text: '机甲风图表预设', link: '/guide/chart-presets' },
+            { text: '编辑模式（Playground）', link: '/guide/edit-mode' },
             { text: '发布到 npm', link: '/guide/publish' },
             { text: 'FAQ', link: '/guide/faq' },
           ],

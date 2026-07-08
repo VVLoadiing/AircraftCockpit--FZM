@@ -100,4 +100,5 @@ import '@fzm/ui/styles'
 
 - [主题系统](./theming) —— 10 套主题与自定义
 - [ECharts 图表适配](./charts) —— 让图表配色联动主题
+- [编辑模式（Playground）](./edit-mode) —— 可视化搭建大屏：增删 TechCard、选内容样式、调宽高
 - [组件总览](/components/tech-card) —— 逐个组件的 API 与示例

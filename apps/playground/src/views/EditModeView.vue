@@ -18,14 +18,8 @@ import {
   CONTENT_TYPES,
   type Side,
   type ContentType,
+  type SelectOption,
 } from '../composables/useEditLayout'
-
-/** TechSelect 的 options 项（@fzm/ui 未导出类型，按其内部结构定义） */
-interface SelectOption {
-  label: string
-  value: string | number
-  [key: string]: unknown
-}
 
 const {
   layout,
@@ -40,6 +34,12 @@ const {
 
 /** 编辑态开关（默认开启，进入即编辑） */
 const editing = ref(true)
+
+/** 左右双侧栏配置（模板 v-for 用，消除左右栏重复结构） */
+const sides: { key: Side; label: string }[] = [
+  { key: 'left', label: '左' },
+  { key: 'right', label: '右' },
+]
 
 /* —— 添加面板状态（每侧独立一份） —— */
 interface AddDraft {
@@ -78,7 +78,7 @@ function onTypeChange(side: Side, val: string | number) {
 </script>
 
 <template>
-  <div class="edit-mode" :class="{ 'is-preview': !editing }">
+  <div class="edit-mode">
     <!-- 顶部工具栏（玻璃浮条，居中浮于 header 下方） -->
     <div class="edit-mode__toolbar">
       <span class="edit-mode__title">
@@ -112,110 +112,61 @@ function onTypeChange(side: Side, val: string | number) {
       </button>
     </div>
 
-    <!-- 左侧栏 -->
-    <Sidebar class="edit-mode__sidebar edit-mode__sidebar--left">
+    <!-- 左右双侧栏：结构完全对称，用 v-for 渲染消除重复 -->
+    <Sidebar
+      v-for="side in sides"
+      :key="side.key"
+      class="edit-mode__sidebar"
+      :class="`edit-mode__sidebar--${side.key}`"
+    >
       <EditableCard
-        v-for="(card, i) in layout.left"
+        v-for="(card, i) in layout[side.key]"
         :key="card.id"
         :card="card"
         :editing="editing"
         :is-first="i === 0"
-        :is-last="i === layout.left.length - 1"
-        @move="(dir) => moveCard('left', card.id, dir)"
-        @remove="removeCard('left', card.id)"
-        @update-content-type="(t) => updateContentType('left', card.id, t)"
-        @update-title="(t) => updateTitle('left', card.id, t)"
-        @update-size="(w, h) => updateSize('left', card.id, w, h)"
+        :is-last="i === layout[side.key].length - 1"
+        @move="(dir) => moveCard(side.key, card.id, dir)"
+        @remove="removeCard(side.key, card.id)"
+        @update-content-type="(t) => updateContentType(side.key, card.id, t)"
+        @update-title="(t) => updateTitle(side.key, card.id, t)"
+        @update-size="(w, h) => updateSize(side.key, card.id, w, h)"
       />
 
       <!-- 空状态 -->
-      <TechEmpty v-if="layout.left.length === 0" description="左栏为空，点下方按钮添加卡片" />
+      <TechEmpty v-if="layout[side.key].length === 0" :description="`${side.label}栏为空，点下方按钮添加卡片`" />
 
       <!-- 添加区（仅编辑态） -->
       <template v-if="editing">
         <button
           type="button"
           class="edit-mode__add-btn"
-          :class="{ 'is-open': openPanel === 'left' }"
-          @click="openAdd('left')"
+          :class="{ 'is-open': openPanel === side.key }"
+          @click="openAdd(side.key)"
         >
           <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 5v14M5 12h14" />
           </svg>
-          {{ openPanel === 'left' ? '收起' : '添加 TechCard' }}
+          {{ openPanel === side.key ? '收起' : '添加 TechCard' }}
         </button>
 
-        <div v-if="openPanel === 'left'" class="edit-mode__add-panel">
+        <div v-if="openPanel === side.key" class="edit-mode__add-panel">
           <label class="edit-mode__field">
             <span class="edit-mode__field-label">内容类型</span>
             <TechSelect
-              :model-value="drafts.left.contentType"
+              :model-value="drafts[side.key].contentType"
               :options="typeOptions"
-              @change="(v: string | number) => onTypeChange('left', v)"
+              @change="(v: string | number) => onTypeChange(side.key, v)"
             />
           </label>
           <label class="edit-mode__field">
             <span class="edit-mode__field-label">标题（可选）</span>
             <TechInput
-              v-model="drafts.left.title"
+              v-model="drafts[side.key].title"
               placeholder="留空使用类型名"
             />
           </label>
-          <HudButton type="primary" native-type="button" @click="confirmAdd('left')">
-            确认添加
-          </HudButton>
-        </div>
-      </template>
-    </Sidebar>
-
-    <!-- 右侧栏 -->
-    <Sidebar class="edit-mode__sidebar edit-mode__sidebar--right">
-      <EditableCard
-        v-for="(card, i) in layout.right"
-        :key="card.id"
-        :card="card"
-        :editing="editing"
-        :is-first="i === 0"
-        :is-last="i === layout.right.length - 1"
-        @move="(dir) => moveCard('right', card.id, dir)"
-        @remove="removeCard('right', card.id)"
-        @update-content-type="(t) => updateContentType('right', card.id, t)"
-        @update-title="(t) => updateTitle('right', card.id, t)"
-        @update-size="(w, h) => updateSize('right', card.id, w, h)"
-      />
-
-      <TechEmpty v-if="layout.right.length === 0" description="右栏为空，点下方按钮添加卡片" />
-
-      <template v-if="editing">
-        <button
-          type="button"
-          class="edit-mode__add-btn"
-          :class="{ 'is-open': openPanel === 'right' }"
-          @click="openAdd('right')"
-        >
-          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 5v14M5 12h14" />
-          </svg>
-          {{ openPanel === 'right' ? '收起' : '添加 TechCard' }}
-        </button>
-
-        <div v-if="openPanel === 'right'" class="edit-mode__add-panel">
-          <label class="edit-mode__field">
-            <span class="edit-mode__field-label">内容类型</span>
-            <TechSelect
-              :model-value="drafts.right.contentType"
-              :options="typeOptions"
-              @change="(v: string | number) => onTypeChange('right', v)"
-            />
-          </label>
-          <label class="edit-mode__field">
-            <span class="edit-mode__field-label">标题（可选）</span>
-            <TechInput
-              v-model="drafts.right.title"
-              placeholder="留空使用类型名"
-            />
-          </label>
-          <HudButton type="primary" native-type="button" @click="confirmAdd('right')">
+          <HudButton type="primary" native-type="button" @click="confirmAdd(side.key)">
             确认添加
           </HudButton>
         </div>

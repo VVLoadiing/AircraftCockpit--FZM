@@ -4,13 +4,8 @@
  * 3D 场景占位铺底 + 双侧栏浮层 + 顶部 KPI。
  * 各组件区域可用 JumpLink 包裹，点击跳转到组件演示页（hover 显示提示）。
  */
-import { computed } from 'vue'
 import {
   BaseChart,
-  useChartPalette,
-  buildLineChart,
-  buildBarChart,
-  buildPieChart,
   TechCard,
   Sidebar,
   KpiItem,
@@ -22,49 +17,12 @@ import {
   MetricBox,
   CountBadge,
 } from '@fzm/ui'
-import type { EChartsOption } from 'echarts'
 import JumpLink from '../components/JumpLink.vue'
+import { useChartMocks } from '../composables/useChartMocks'
 
-const { palette } = useChartPalette()
+const { lineOption, barOption, pieOption } = useChartMocks()
 
-const lineOption = computed<EChartsOption>(
-  () =>
-    buildLineChart({
-      palette: palette.value,
-      categories: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'],
-      series: [
-        { name: '产线A', data: [320, 432, 501, 634, 790, 930, 820] },
-        { name: '产线B', data: [220, 282, 391, 434, 590, 530, 420] },
-      ],
-      unit: '件',
-    }) as EChartsOption,
-)
-
-const barOption = computed<EChartsOption>(
-  () =>
-    buildBarChart({
-      palette: palette.value,
-      categories: ['一', '二', '三', '四', '五', '六', '日'],
-      series: [{ data: [120, 200, 150, 80, 70, 110, 130] }],
-      unit: '件',
-    }) as EChartsOption,
-)
-
-const pieOption = computed<EChartsOption>(
-  () =>
-    buildPieChart({
-      palette: palette.value,
-      centerLabel: '设备总数',
-      centerUnit: '台',
-      data: [
-        { name: '正常', value: 1048, color: palette.value.success },
-        { name: '告警', value: 335, color: palette.value.warning },
-        { name: '故障', value: 124, color: palette.value.danger },
-        { name: '离线', value: 187, color: '#64748b' },
-      ],
-    }) as EChartsOption,
-)
-
+// 告警列表：大屏示例用更长的数据（含秒 + 更多条目），与编辑模式 mock 的精简版互补
 const alertList = [
   { level: 'high' as const, text: '3#注塑机 温度超限 92℃', time: '12:04:21' },
   { level: 'mid' as const, text: 'B 区冷却水压偏低', time: '12:01:08' },

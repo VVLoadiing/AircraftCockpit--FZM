@@ -38,8 +38,8 @@ export const CONTENT_TYPES: ContentTypeMeta[] = [
   { type: 'progress', label: '进度条', category: '列表 / 行' },
 ]
 
-/** 根据 ContentType 查元信息（找不到回退折线图） */
-export function getContentTypeMeta(type: ContentType): ContentTypeMeta {
+/** 根据 ContentType 查元信息（找不到回退折线图）。仅内部使用 */
+function getContentTypeMeta(type: ContentType): ContentTypeMeta {
   return CONTENT_TYPES.find((c) => c.type === type) ?? CONTENT_TYPES[0]
 }
 
@@ -68,6 +68,16 @@ export interface EditLayout {
 
 /** 侧：左 / 右 */
 export type Side = keyof EditLayout
+
+/**
+ * TechSelect 的 options 项（@fzm/ui 未导出类型，按其内部结构定义）。
+ * 集中定义于此，供 EditModeView / CardSettingsPanel / EditableCard 复用。
+ */
+export interface SelectOption {
+  label: string
+  value: string | number
+  [key: string]: unknown
+}
 
 const STORAGE_KEY = 'fzm-edit-layout'
 

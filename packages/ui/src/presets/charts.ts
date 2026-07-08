@@ -257,7 +257,7 @@ export function buildPieChart(opts: BuildPieChartOptions): AnyOption {
           text: `{val|${showVal}${isNum ? centerUnit : ''}}`,
           subtext: centerLabel,
           left: '50%',
-          top: doughnut ? '38%' : 'auto',
+          top: '38%',
           textAlign: 'center',
           textVerticalAlign: 'auto',
           textStyle: {
@@ -317,8 +317,3 @@ export function buildPieChart(opts: BuildPieChartOptions): AnyOption {
     ],
   }
 }
-
-// ────────────────────────────────────────────────────────────────
-// 导出
-// ────────────────────────────────────────────────────────────────
-export { chartTooltip }

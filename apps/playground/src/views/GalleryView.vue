@@ -4,7 +4,7 @@
  * 按 5 类展示全部 30 个组件，每个卡片显示组件名 + 一句话描述。
  * 点击任一卡片 → 跳转到组件演示页对应锚点（高亮闪烁定位）。
  */
-import { inject, type Ref } from 'vue'
+import { inject } from 'vue'
 
 const navigateToComponent = inject<(anchor: string) => void>('navigateToComponent')!
 
@@ -33,7 +33,8 @@ const groups: CompGroup[] = [
     items: [
       { anchor: 'tech-card', name: 'TechCard', desc: '切角科技面板（最常用容器）' },
       { anchor: 'glass-panel', name: 'GlassPanel', desc: '切角玻璃浮层（场景叠加）' },
-      { anchor: 'glass-panel', name: 'FzGlass', desc: '统一玻璃浮窗（弹窗/详情）' },
+      { anchor: 'glass-panel', name: 'FzGlass', desc: '统一玻璃浮窗（含 Title/Row/Close 子组件）' },
+      { anchor: 'glass-panel', name: 'FzGlass 子组件', desc: 'FzGlassTitle 标题条 / FzGlassRow 数据行 / FzGlassClose 关闭' },
     ],
   },
   {
@@ -48,6 +49,7 @@ const groups: CompGroup[] = [
       { anchor: 'tech-tag', name: 'TechTag', desc: '科技标签（可关闭）' },
       { anchor: 'count-up', name: 'TechAvatar', desc: '头像 / 设备图标' },
       { anchor: 'tech-tag', name: 'TechDivider', desc: '分割线（带文字）' },
+      { anchor: 'base-chart', name: 'BaseChart', desc: 'ECharts 自适应封装' },
     ],
   },
   {
@@ -86,8 +88,6 @@ const groups: CompGroup[] = [
     ],
   },
 ]
-
-const activeTab = inject<Ref<string>>('activeTab')
 </script>
 
 <template>
