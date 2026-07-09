@@ -35,6 +35,7 @@ export const componentDocs: ComponentDocEntry[] = [
   { name: 'tech-divider', title: 'TechDivider 分割线', category: '数据展示', loader: () => import('./components/tech-divider.doc') },
   { name: 'tech-avatar', title: 'TechAvatar 头像', category: '数据展示', loader: () => import('./components/tech-avatar.doc') },
   { name: 'base-chart', title: 'BaseChart 图表封装', category: '数据展示', loader: () => import('./components/base-chart.doc') },
+  { name: 'tech-scroll', title: 'TechScroll 滚动容器', category: '数据展示', loader: () => import('./components/tech-scroll.doc') },
   // 反馈与标识
   { name: 'status-dot', title: 'StatusDot 状态点', category: '反馈与标识', loader: () => import('./components/status-dot.doc') },
   { name: 'count-badge', title: 'CountBadge 计数徽章', category: '反馈与标识', loader: () => import('./components/count-badge.doc') },
@@ -44,6 +45,9 @@ export const componentDocs: ComponentDocEntry[] = [
   { name: 'hud-chip', title: 'HudChip 提示标签', category: '反馈与标识', loader: () => import('./components/hud-chip.doc') },
   { name: 'tech-empty', title: 'TechEmpty 空状态', category: '反馈与标识', loader: () => import('./components/tech-empty.doc') },
   { name: 'loading-spinner', title: 'LoadingSpinner 加载中', category: '反馈与标识', loader: () => import('./components/loading-spinner.doc') },
+  { name: 'tech-dialog', title: 'TechDialog 对话框', category: '反馈与标识', loader: () => import('./components/tech-dialog.doc') },
+  { name: 'tech-message', title: 'Message 消息提示', category: '反馈与标识', loader: () => import('./components/tech-message.doc') },
+  { name: 'tech-popconfirm', title: 'Popconfirm 气泡确认框', category: '反馈与标识', loader: () => import('./components/tech-popconfirm.doc') },
   // 输入与导航
   { name: 'tech-input', title: 'TechInput 输入框', category: '输入与导航', loader: () => import('./components/tech-input.doc') },
   { name: 'tech-select', title: 'TechSelect 下拉选择', category: '输入与导航', loader: () => import('./components/tech-select.doc') },

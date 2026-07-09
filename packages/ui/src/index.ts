@@ -44,6 +44,12 @@ import LoadingSpinner from './components/LoadingSpinner'
 import CountUp from './components/CountUp'
 import TechDivider from './components/TechDivider'
 import TechAvatar from './components/TechAvatar'
+// 功能容器
+import TechScroll from './components/TechScroll'
+import TechDialog from './components/TechDialog'
+// 反馈交互
+import TechMessage from './components/TechMessage'
+import TechPopconfirm from './components/TechPopconfirm'
 // 布局 / 应用级
 import AppHeader from './components/AppHeader'
 
@@ -55,6 +61,10 @@ export {
   chartTooltip,
   withAlpha,
 } from './composables/useChartPalette'
+
+// —— 消息提示命令式 API ——
+export { Message, useMessage } from './components/TechMessage'
+export type { MessageOptions } from './components/TechMessage'
 
 // —— 机甲风图表预设 ——
 export { buildLineChart, buildBarChart, buildPieChart } from './presets/charts'
@@ -106,6 +116,12 @@ export {
   CountUp,
   TechDivider,
   TechAvatar,
+  // 功能容器
+  TechScroll,
+  TechDialog,
+  // 反馈交互
+  TechMessage,
+  TechPopconfirm,
   // 布局 / 应用级
   AppHeader,
 }
@@ -146,6 +162,12 @@ const components = {
   CountUp,
   TechDivider,
   TechAvatar,
+  // 功能容器
+  TechScroll,
+  TechDialog,
+  // 反馈交互
+  TechMessage,
+  TechPopconfirm,
   // 布局 / 应用级
   AppHeader,
 }
