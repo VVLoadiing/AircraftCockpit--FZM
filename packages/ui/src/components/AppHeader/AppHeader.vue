@@ -426,16 +426,16 @@ onBeforeUnmount(() => {
   box-shadow: 0 0 8px rgb(var(--primary-rgb) / 0.3);
 }
 
-/* 流动电流脉冲（文档：亮青 rgba(45,228,255,.95) + 双层强辉光 10px/22px） */
+/* 流动电流脉冲（主题色脉冲 + 双层强辉光，随主题切换） */
 .fzm-app-header__pulse {
   position: absolute;
   top: 50%;
   left: 0;
   width: 72px;
-  height: 2px;
+  height: 3px;
   transform: translateY(-50%);
-  background: linear-gradient(90deg, transparent, rgba(45, 228, 255, 0.95) 50%, transparent);
-  box-shadow: 0 0 10px rgba(45, 228, 255, 0.85), 0 0 22px rgba(45, 228, 255, 0.4);
+  background: linear-gradient(90deg, transparent, var(--primary-light) 50%, transparent);
+  box-shadow: 0 0 10px rgb(var(--primary-rgb) / 0.85), 0 0 22px rgb(var(--primary-rgb) / 0.4);
   animation: fzm-header-flow 3.2s linear infinite;
 }
 
@@ -444,6 +444,17 @@ onBeforeUnmount(() => {
   12% { opacity: 1; }
   88% { opacity: 1; }
   100% { left: 92%; opacity: 0; }
+}
+
+/* 虚线轨道：贴在母线下方，形成能量管线导轨感（用渐变模拟虚线，可控间距） */
+.fzm-app-header__spacer::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 12px;
+  top: calc(100% - 1.5px);
+  height: 1px;
+  background-image: repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 12px);
 }
 
 /* 右端旋转菱形锚点（空心锁定标记） */

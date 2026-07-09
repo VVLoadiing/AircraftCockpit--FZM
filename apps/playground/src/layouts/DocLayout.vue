@@ -13,10 +13,14 @@ import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {
   useUiTheme,
+  initUiStyle,
   UI_STYLE_OPTIONS,
   TechSelect,
 } from '@fzm-tech-hud/ui'
 import { categoryGroups } from '../docs/registry'
+
+// 进入文档布局即恢复已存主题到 DOM（与 DashboardLayout 保持一致，刷新后不丢主题）
+initUiStyle()
 
 const route = useRoute()
 const router = useRouter()
@@ -115,35 +119,24 @@ function goHome() {
   flex-direction: column;
 
   /*
-   * 文档站框架固定深色，不受主题切换影响。
+   * 文档站背景跟随主题变化：网格底纹 + 主题色辉光。
    *
-   * 浅色主题（冰白系列）会把 --bg-* 变浅、--text-* 变深，
-   * 直接套用会导致文档框架「深底深字 / 浅底浅字」糊成一团看不清。
-   * 这里在文档根上把背景与文字令牌锁定为深色体系固定值，
-   * 整个文档子树（侧栏 / 内容页 / DemoBlock）统一使用这套深色，
-   * 只有主色族（--primary / --accent 等点缀色）跟随主题变化 ——
-   * 这样既能实时预览主题主色差异，又保证文字始终清晰可读。
+   * 背景与文字令牌全部沿用主题（不再锁定），切换主题时底色、网格、主色
+   * 全部联动，差异最明显。文字可读性靠「网格底 + 实底卡片层」保证：
+   * 内容都落在 --bg-card-strong 卡片上，卡片在深色主题是深实底、
+   * 浅色主题是白实底，文字（各主题的高对比值）始终清晰。
+   *
+   * 网格线颜色用 --border-light（主题色半透）：
+   * 深色主题主色偏暗 → 线在深底上可见；浅色主题主色也偏深 → 线在浅底上同样可见。
+   * 网格大小 32px，细线 1px，呼应大屏科技风。
    */
-  --bg-body: #050709;
-  --bg-card: linear-gradient(168deg, rgba(5, 30, 54, 0.2), rgba(5, 30, 54, 0.4) 60%, rgba(5, 30, 54, 0.45));
-  --bg-card-strong: rgba(4, 24, 44, 0.94);
-  --bg-elevated: rgba(6, 30, 54, 0.97);
-  --bg-scene: #050709;
-  --bg-hover: rgb(var(--primary-rgb) / 0.18);
-
-  --text-primary: #ffffff;
-  --text-secondary: #b8d8ea;
-  --text-muted: #8aa8bc;
-  --text-on-primary: #032030;
-
-  /* 深色主题的描边 / 阴影 / 玻璃体系（浅色主题会反转，这里锁回深色） */
-  --border-color: rgb(var(--primary-rgb) / 0.36);
-  --border-light: rgb(var(--primary-rgb) / 0.22);
-  --border-strong: rgb(var(--primary-rgb) / 0.6);
-
-  background:
-    radial-gradient(circle at 50% 0%, rgba(8, 30, 50, 0.6), transparent 55%),
-    var(--bg-body);
+  background-color: var(--bg-body);
+  background-image:
+    radial-gradient(circle at 50% 0%, rgb(var(--primary-rgb) / 0.12), transparent 55%),
+    linear-gradient(var(--border-light) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
+  background-size: 100% 100%, 32px 32px, 32px 32px;
+  background-position: 0 0, 0 0, 0 0;
 }
 
 /* —— 顶部导航条 —— */
@@ -203,6 +196,7 @@ function goHome() {
 }
 
 .doc-layout__theme {
+  width: 120px;
   margin-left: auto;
 }
 
@@ -218,7 +212,8 @@ function goHome() {
   width: 230px;
   overflow-y: auto;
   overflow-x: hidden;
-  background: rgba(3, 12, 22, 0.6);
+  /* 跟随主题的浮层底色：深色主题偏深、浅色主题偏浅，与文字保持对比 */
+  background: var(--bg-elevated);
   border-right: 1px solid var(--border-color);
   scrollbar-width: thin;
 }

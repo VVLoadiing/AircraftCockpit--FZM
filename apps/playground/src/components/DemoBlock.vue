@@ -72,9 +72,24 @@ async function copyCode() {
 
 <style scoped>
 .demo {
+  /*
+   * DemoBlock 固定深色实底（不跟随浅色主题）。
+   * 代码语法高亮的 token 配色是为深色底设计的（亮色 token），
+   * 若代码区跟随浅色主题变白，亮色 token 会看不清。
+   * 故卡片 / 预览区 / 代码区统一锁定深色体系，保证代码始终清晰；
+   * 预览区内的真实组件仍按当前主题渲染（文档本就该展示组件真实效果）。
+   * 主色族（--primary/--accent）保持跟随主题，边框/辉光仍体现主题色调。
+   */
+  --bg-body: #050709;
+  --bg-card: linear-gradient(168deg, rgba(5, 30, 54, 0.45), rgba(5, 30, 54, 0.6) 60%, rgba(5, 30, 54, 0.7));
+  --bg-card-strong: rgba(4, 24, 44, 0.96);
+  --text-primary: #ffffff;
+  --text-secondary: #b8d8ea;
+  --text-muted: #8aa8bc;
+
   margin-bottom: 28px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background: var(--bg-card-strong);
+  border: 1px solid rgb(var(--primary-rgb) / 0.36);
   border-radius: var(--radius-md);
   overflow: hidden;
 }

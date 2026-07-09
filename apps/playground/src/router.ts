@@ -9,7 +9,7 @@
  *
  * /components 无 :name 时重定向到 /intro（组件库说明 / 使用指南）。
  */
-import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
 import DashboardLayout from './layouts/DashboardLayout.vue'
 import DocLayout from './layouts/DocLayout.vue'
 import DashboardView from './views/DashboardView.vue'
@@ -43,7 +43,7 @@ const routes: RouteRecordRaw[] = [
 ]
 
 export const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
   scrollBehavior(_to, _from, savedPosition) {
     return savedPosition ?? { top: 0 }

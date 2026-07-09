@@ -12,6 +12,7 @@ const uiSrc = resolve(__dirname, '../../packages/ui/src')
 
 export default defineConfig({
   plugins: [vue()],
+  base: './',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

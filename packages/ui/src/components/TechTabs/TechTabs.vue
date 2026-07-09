@@ -3,7 +3,7 @@
  * TechTabs — 标签页切换
  * 科技横幅条风格的标签头 + 激活指示条。配合默认插槽渲染当前面板。
  */
-import { computed } from 'vue'
+import { computed, ref, nextTick, onMounted, watch } from 'vue'
 
 interface TabItem {
   /** 唯一标识 */
@@ -31,20 +31,52 @@ const emit = defineEmits<{
   (e: 'change', value: string | number, item: TabItem): void
 }>()
 
+const headerRef = ref<HTMLElement>()
+const indicatorStyle = ref({ width: '0px', left: '0px' })
+
 const activeValue = computed(() => props.modelValue)
 const activeItem = computed(() => props.items.find((t) => t.value === activeValue.value))
+const activeIndex = computed(() => props.items.findIndex((t) => t.value === props.modelValue))
+
+function updateIndicatorPosition() {
+  if (!headerRef.value) return
+  const items = headerRef.value.querySelectorAll('.fzm-tabs__item')
+  const activeTab = items[activeIndex.value] as HTMLElement
+  if (!activeTab) return
+
+  indicatorStyle.value = {
+    width: `${activeTab.offsetWidth - 16}px`,
+    left: `${activeTab.offsetLeft + 8}px`,
+  }
+}
 
 function select(item: TabItem) {
   if (item.disabled) return
   emit('update:modelValue', item.value)
   emit('change', item.value, item)
 }
+
+watch(activeValue, () => {
+  nextTick(updateIndicatorPosition)
+})
+
+watch(
+  () => props.items,
+  () => {
+    nextTick(updateIndicatorPosition)
+  },
+  { deep: true },
+)
+
+onMounted(() => {
+  nextTick(updateIndicatorPosition)
+})
 </script>
 
 <template>
   <div class="fzm-tabs">
     <!-- 标签头 -->
-    <div class="fzm-tabs__header">
+    <div ref="headerRef" class="fzm-tabs__header">
       <button
         v-for="item in items"
         :key="item.value"
@@ -56,13 +88,19 @@ function select(item: TabItem) {
       >
         <span class="fzm-tabs__label">{{ item.label }}</span>
       </button>
+      <!-- 滑动指示条 -->
+      <div class="fzm-tabs__indicator" :style="indicatorStyle"></div>
     </div>
 
     <!-- 面板：可用默认插槽自定义，也可用 #panel(item) 具名插槽 -->
     <div class="fzm-tabs__panel">
-      <slot :item="activeItem" :value="activeValue">
-        <slot :name="`panel-${activeValue}`" />
-      </slot>
+      <Transition name="fzm-tabs-fade" mode="out-in">
+        <div :key="activeValue">
+          <slot :item="activeItem" :value="activeValue">
+            <slot :name="`panel-${activeValue}`" />
+          </slot>
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
@@ -76,6 +114,7 @@ function select(item: TabItem) {
 }
 
 .fzm-tabs__header {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 2px;
@@ -85,6 +124,7 @@ function select(item: TabItem) {
 
 .fzm-tabs__item {
   position: relative;
+  z-index: 1;
   padding: 8px 14px;
   color: var(--text-secondary);
   background: transparent;
@@ -111,19 +151,35 @@ function select(item: TabItem) {
   text-shadow: 0 0 10px rgb(var(--primary-rgb) / 0.5);
 }
 
-/* 激活指示条：底部主题色光柱 + 辉光 */
-.fzm-tabs__item.is-active::after {
-  content: '';
+/* 滑动指示条 */
+.fzm-tabs__indicator {
   position: absolute;
-  left: 8px;
-  right: 8px;
   bottom: -1px;
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--primary), transparent);
   box-shadow: 0 0 8px rgb(var(--primary-rgb) / 0.8);
+  transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1), width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
 }
 
 .fzm-tabs__panel {
   min-height: 0;
+  overflow: hidden;
+}
+
+/* 面板切换动画 */
+.fzm-tabs-fade-enter-active,
+.fzm-tabs-fade-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.fzm-tabs-fade-enter-from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.fzm-tabs-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
 }
 </style>

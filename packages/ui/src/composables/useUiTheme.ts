@@ -28,6 +28,17 @@ function readStored(): UiStyle {
 /** 全局唯一主题状态（模块单例，多组件共享） */
 export const uiStyle = ref<UiStyle>(readStored())
 
+/**
+ * 模块加载即把 localStorage 里已存的主题同步到 <html data-ui-style>。
+ *
+ * 仅靠 ref 初始化只会更新 JS 状态，DOM 不会变 —— 任何 import 本模块的入口
+ * （含不调用 initUiStyle 的布局/页面）刷新后都能正确恢复主题，避免回到默认。
+ * SSR 安全：无 document 时跳过。
+ */
+if (typeof document !== 'undefined') {
+  document.documentElement.setAttribute('data-ui-style', uiStyle.value)
+}
+
 /** 当前主题元信息 */
 export const currentUiStyle = computed<UiStyleOption>(
   () => UI_STYLE_OPTIONS.find((o) => o.id === uiStyle.value) ?? UI_STYLE_OPTIONS[0],

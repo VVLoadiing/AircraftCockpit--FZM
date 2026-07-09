@@ -130,7 +130,7 @@ watch(() => route.params.name, load, { immediate: true })
 
 <style scoped>
 .doc-view {
-  max-width: 960px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 8px 0 60px;
 }

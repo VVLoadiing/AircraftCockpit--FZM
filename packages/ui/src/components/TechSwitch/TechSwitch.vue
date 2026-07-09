@@ -60,7 +60,8 @@ function toggle() {
   height: 20px;
   padding: 0;
   border: 1px solid var(--border-color);
-  background: rgb(var(--primary-rgb) / 0.12);
+  background: rgb(255 255 255 / 0.08);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
   border-radius: var(--radius-sm);
   /* 左上+右下切角 */
   clip-path: polygon(
