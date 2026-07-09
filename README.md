@@ -13,8 +13,7 @@ PC模板项目/
 ├─ packages/
 │  └─ ui/            # @fzm/ui —— 可发 npm 的组件库（Vue 3 + TS + 纯 CSS 变量）
 └─ apps/
-   ├─ playground/    # Vite + Vue 演示页（4 视图：大屏示例/编辑模式/组件总览/组件演示，可互相跳转 + 10 套主题切换）
-   └─ docs/          # VitePress 文档站（安装 / 主题 / 各组件 API + 示例）
+   └─ playground/    # Vite + Vue 演示站（大屏示例 / 编辑模式 / 组件总览 / 组件文档，可互相跳转 + 10 套主题切换）
 ```
 
 ## 环境要求
@@ -33,13 +32,10 @@ npm install -g pnpm
 # 1. 安装依赖（根目录执行，自动联动所有子包）
 pnpm install
 
-# 2. 启动演示页（4 个视图：大屏组装示例 / 编辑模式 / 组件总览 / 组件演示 + 主题切换）
+# 2. 启动演示站（大屏示例 / 编辑模式 / 组件总览 / 组件文档 + 主题切换）
 pnpm dev
 
-# 3. 启动文档站
-pnpm dev:docs
-
-# 4. 构建组件库
+# 3. 构建组件库
 pnpm build:ui
 ```
 
@@ -47,22 +43,23 @@ pnpm build:ui
 
 | 命令 | 作用 |
 |------|------|
-| `pnpm dev` | 启动 playground 演示页 |
-| `pnpm dev:docs` | 启动 VitePress 文档站 |
+| `pnpm dev` | 启动 playground 演示站（含大屏演示与组件文档） |
 | `pnpm build:ui` | 构建 `@fzm/ui` 组件库（产出 dist/，含类型与样式） |
-| `pnpm build` | 依次构建 UI 库与演示页 |
-| `pnpm build:docs` | 构建文档站 |
-| `pnpm preview` | 预览演示页构建产物 |
+| `pnpm build` | 依次构建 UI 库与演示站 |
+| `pnpm preview` | 预览演示站构建产物 |
 | `pnpm clean` | 清理所有子包的 dist 与 node_modules |
 
-## Playground 演示页（4 个视图，可互相跳转）
+## Playground 演示站（大屏浮层架构 + 组件文档）
 
-启动 `pnpm dev` 后，演示页包含四个视图：
+启动 `pnpm dev` 后，演示站通过 vue-router 在两套布局间切换：
 
-1. **大屏组装示例** — 完整数字孪生大屏（3D 场景全屏铺底 + 双侧栏浮层 + KPI/图表）。鼠标 hover 任意组件区域会显示「查看组件 →」提示，点击即跳转到该组件的演示页并高亮定位。
-2. **编辑模式** — 可视化大屏搭建器：在左右双侧栏自由增删 TechCard 模块、上下移动、为每张卡片选择内容样式（9 种：折线/柱状/饼图/KPI/CountUp/MetricBox/DataRow/TechRow/ProgressBar）、调整宽高，结果自动保存到 localStorage。详见 [编辑模式文档](./apps/docs/guide/edit-mode.md)。
-3. **组件总览** — 按 5 类（基础容器 / 数据展示 / 反馈标识 / 输入导航 / 布局）展示全部 30 个组件卡片，点击任一卡片跳转到演示页对应锚点。
-4. **组件演示** — 逐个组件的可交互 demo，支持从大屏/总览页跳转过来后自动滚动定位 + 高亮闪烁。
+**大屏浮层架构**（`/`、`/edit`、`/gallery`）——3D 场景全屏铺底 + 顶部 AppHeader + 二级导航浮条：
+
+1. **大屏组装示例** — 完整数字孪生大屏（3D 场景全屏铺底 + 双侧栏浮层 + KPI/图表）。鼠标 hover 任意组件区域会显示「查看组件 →」提示，点击即跳转到该组件的文档页。
+2. **编辑模式** — 可视化大屏搭建器：在左右双侧栏自由增删 TechCard 模块、上下移动、为每张卡片选择内容样式（9 种：折线/柱状/饼图/KPI/CountUp/MetricBox/DataRow/TechRow/ProgressBar）、调整宽高，结果自动保存到 localStorage。
+3. **组件总览** — 按 5 类（基础容器 / 数据展示 / 反馈标识 / 输入导航 / 布局）展示全部 29 个组件卡片，点击任一卡片跳转到该组件的独立文档页。
+
+**组件文档**（`/components/:name`）——独立文档布局，左侧分类目录 + 右侧滚动内容。每个组件一个独立页面，包含：组件介绍、多个代码案例（实时预览真实效果 + 一键查看/复制源码）、Props / Slots / Events API 表格。预览与代码块同源（`?raw` 导入），所见即所得。
 
 顶部「主题」切换条可在 10 套主题（8 深色 + 2 白色）间实时切换，所有组件与图表配色联动。
 
@@ -74,7 +71,7 @@ pnpm build:ui
 - **10 套主题**：`<html data-ui-style="xxx">` 触发（8 深色 + 2 白色），配套 `useUiTheme()` 切换 + 持久化
 - **机甲风图表预设**：`buildLineChart` / `buildBarChart` / `buildPieChart` 一行生成带辉光、菱形数据点、流光轨道、中心 KPI 的完整 EChartsOption；`withAlpha()` 处理 canvas 渐变透明度
 
-详细使用见 [文档站](./apps/docs) 或 [packages/ui/README.md](./packages/ui/README.md)。
+详细使用见 playground 演示站的组件文档（`pnpm dev` 后访问 `/components/tech-card`），或 [packages/ui/README.md](./packages/ui/README.md)。
 
 ---
 
