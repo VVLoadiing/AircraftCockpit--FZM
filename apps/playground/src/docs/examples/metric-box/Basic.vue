@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MetricBox } from '@fzm/ui'
+import { MetricBox } from '@fzm-tech-hud/ui'
 </script>
 
 <template>

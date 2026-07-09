@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TechAvatar } from '@fzm/ui'
+import { TechAvatar } from '@fzm-tech-hud/ui'
 </script>
 
 <template>

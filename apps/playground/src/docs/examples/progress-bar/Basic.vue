@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ProgressBar } from '@fzm/ui'
+import { ProgressBar } from '@fzm-tech-hud/ui'
 </script>
 
 <template>

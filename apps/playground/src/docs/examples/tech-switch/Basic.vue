@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { TechSwitch } from '@fzm/ui'
+import { TechSwitch } from '@fzm-tech-hud/ui'
 
 const a = ref(true)
 const b = ref(false)

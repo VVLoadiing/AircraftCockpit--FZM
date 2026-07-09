@@ -1,6 +1,6 @@
 # 曜蓝机甲 Tech HUD · 项目模板
 
-一套面向 **大屏数字孪生 / 工业监控 / 智慧中台** 的科技风 Vue 3 项目模板（深色为主，含 2 套白色主题），内置可独立发布到 npm 的 UI 组件库 `@fzm/ui`。
+一套面向 **大屏数字孪生 / 工业监控 / 智慧中台** 的科技风 Vue 3 项目模板（深色为主，含 2 套白色主题），内置可独立发布到 npm 的 UI 组件库 `@fzm-tech-hud/ui`。
 
 设计语言源自 [`UI设计系统规范.md`](./UI设计系统规范.md)，核心特征：切角科技面板、高亮辉光、毛玻璃浮层、低饱和工业配色、等宽数字字体、10 套主题预设（8 深色 + 2 白色）。
 
@@ -11,7 +11,7 @@
 ```
 PC模板项目/
 ├─ packages/
-│  └─ ui/            # @fzm/ui —— 可发 npm 的组件库（Vue 3 + TS + 纯 CSS 变量）
+│  └─ ui/            # @fzm-tech-hud/ui —— 可发 npm 的组件库（Vue 3 + TS + 纯 CSS 变量）
 └─ apps/
    └─ playground/    # Vite + Vue 演示站（大屏示例 / 编辑模式 / 组件总览 / 组件文档，可互相跳转 + 10 套主题切换）
 ```
@@ -44,7 +44,7 @@ pnpm build:ui
 | 命令 | 作用 |
 |------|------|
 | `pnpm dev` | 启动 playground 演示站（含大屏演示与组件文档） |
-| `pnpm build:ui` | 构建 `@fzm/ui` 组件库（产出 dist/，含类型与样式） |
+| `pnpm build:ui` | 构建 `@fzm-tech-hud/ui` 组件库（产出 dist/，含类型与样式） |
 | `pnpm build` | 依次构建 UI 库与演示站 |
 | `pnpm preview` | 预览演示站构建产物 |
 | `pnpm clean` | 清理所有子包的 dist 与 node_modules |
@@ -63,11 +63,11 @@ pnpm build:ui
 
 顶部「主题」切换条可在 10 套主题（8 深色 + 2 白色）间实时切换，所有组件与图表配色联动。
 
-## `@fzm/ui` 组件库
+## `@fzm-tech-hud/ui` 组件库
 
 - **零运行时依赖**：纯 CSS 变量驱动，组件库本身不引第三方
 - **Vue / ECharts 为 peerDependency**：避免重复安装、版本冲突
-- **双注册模式**：支持 `app.use(FzmUI)` 全量注册，也支持 `import { TechCard } from '@fzm/ui'` 按需引入
+- **双注册模式**：支持 `app.use(FzmUI)` 全量注册，也支持 `import { TechCard } from '@fzm-tech-hud/ui'` 按需引入
 - **10 套主题**：`<html data-ui-style="xxx">` 触发（8 深色 + 2 白色），配套 `useUiTheme()` 切换 + 持久化
 - **机甲风图表预设**：`buildLineChart` / `buildBarChart` / `buildPieChart` 一行生成带辉光、菱形数据点、流光轨道、中心 KPI 的完整 EChartsOption；`withAlpha()` 处理 canvas 渐变透明度
 

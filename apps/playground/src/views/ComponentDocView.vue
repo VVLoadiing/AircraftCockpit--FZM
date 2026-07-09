@@ -10,7 +10,7 @@ import { ref, watch, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import DemoBlock from '../components/DemoBlock.vue'
 import { findEntry } from '../docs/registry'
-import { HudButton, TechEmpty } from '@fzm/ui'
+import { HudButton, TechEmpty } from '@fzm-tech-hud/ui'
 import type { ComponentDoc } from '../docs/types'
 
 const route = useRoute()
@@ -49,7 +49,7 @@ watch(() => route.params.name, load, { immediate: true })
 
     <!-- 未找到 -->
     <TechEmpty v-else-if="notFound" description="未找到该组件的文档">
-      <HudButton type="primary" @click="router.push('/components/tech-card')">返回组件文档</HudButton>
+      <HudButton type="primary" @click="router.push('/intro')">返回组件库说明</HudButton>
     </TechEmpty>
 
     <!-- 文档正文 -->

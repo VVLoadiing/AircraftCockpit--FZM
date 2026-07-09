@@ -1,5 +1,5 @@
 {
-  "name": "@fzm/ui",
+  "name": "@fzm-tech-hud/ui",
   "version": "1.0.3",
   "description": "曜蓝机甲 Tech HUD —— Vue 3 深色科技风 UI 组件库（大屏数字孪生 / 工业监控 / 智慧中台）",
   "type": "module",
@@ -17,16 +17,16 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/fzm-ui.umd.cjs",
-  "module": "./dist/fzm-ui.js",
+  "main": "./dist/fzm-tech-hud-ui.umd.cjs",
+  "module": "./dist/fzm-tech-hud-ui.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/fzm-ui.js",
-      "require": "./dist/fzm-ui.umd.cjs"
+      "import": "./dist/fzm-tech-hud-ui.js",
+      "require": "./dist/fzm-tech-hud-ui.umd.cjs"
     },
-    "./styles": "./dist/fzm-ui.css",
+    "./styles": "./dist/fzm-tech-hud-ui.css",
     "./package.json": "./package.json"
   },
   "sideEffects": [

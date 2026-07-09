@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CountBadge, LevelBadge } from '@fzm/ui'
+import { CountBadge, LevelBadge } from '@fzm-tech-hud/ui'
 </script>
 
 <template>

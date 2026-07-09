@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TechCard, TechRow } from '@fzm/ui'
+import { TechCard, TechRow } from '@fzm-tech-hud/ui'
 
 const alerts = Array.from({ length: 8 }, (_, i) => `日志条目 #${i + 1}`)
 </script>

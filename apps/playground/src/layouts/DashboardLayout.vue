@@ -13,7 +13,7 @@
  */
 import { computed, provide, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { initUiStyle, HudFrame, AppHeader } from '@fzm/ui'
+import { initUiStyle, HudFrame, AppHeader } from '@fzm-tech-hud/ui'
 
 // App 启动即恢复已存主题
 initUiStyle()
@@ -87,9 +87,9 @@ provide('pendingAnchor', pendingAnchor)
     </button>
     <button
       class="app__tab"
-      :class="{ 'is-active': route.path.startsWith('/components') }"
-      title="每个组件一个独立文档页：介绍、案例、代码、实时预览"
-      @click="router.push('/components/tech-card')"
+      :class="{ 'is-active': route.path.startsWith('/components') || route.path === '/intro' || route.path === '/theme' }"
+      title="组件库说明 + 主题系统 + 每个组件的独立文档页"
+      @click="router.push('/intro')"
     >
       组件文档
     </button>

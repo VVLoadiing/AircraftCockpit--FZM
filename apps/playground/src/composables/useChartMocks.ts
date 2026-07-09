@@ -5,11 +5,11 @@
  * 几乎相同的 mock（折线 / 柱状 / 饼图 option + 告警列表），改一处忘另一处。
  * 这里统一导出工厂函数，两处共用同一份数据源。
  *
- * 图表 option 用 useChartPalette + buildXxxChart 生成（沿用 @fzm/ui 预设），
+ * 图表 option 用 useChartPalette + buildXxxChart 生成（沿用 @fzm-tech-hud/ui 预设），
  * 返回 computed，切主题时配色自动联动。
  */
 import { computed } from 'vue'
-import { useChartPalette, buildLineChart, buildBarChart, buildPieChart } from '@fzm/ui'
+import { useChartPalette, buildLineChart, buildBarChart, buildPieChart } from '@fzm-tech-hud/ui'
 import type { EChartsOption } from 'echarts'
 
 /** 告警列表（科技列表项 TechRow + LevelBadge 的示例数据） */

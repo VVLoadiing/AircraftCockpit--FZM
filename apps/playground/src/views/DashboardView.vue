@@ -16,7 +16,7 @@ import {
   ProgressBar,
   MetricBox,
   CountBadge,
-} from '@fzm/ui'
+} from '@fzm-tech-hud/ui'
 import JumpLink from '../components/JumpLink.vue'
 import { useChartMocks } from '../composables/useChartMocks'
 

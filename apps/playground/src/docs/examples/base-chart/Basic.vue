@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BaseChart, TechCard } from '@fzm/ui'
+import { BaseChart, TechCard } from '@fzm-tech-hud/ui'
 import { useChartMocks } from '../../../composables/useChartMocks'
 
 const { lineOption, barOption, pieOption } = useChartMocks()

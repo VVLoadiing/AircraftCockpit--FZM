@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { StatusDot } from '@fzm/ui'
+import { StatusDot } from '@fzm-tech-hud/ui'
 </script>
 
 <template>

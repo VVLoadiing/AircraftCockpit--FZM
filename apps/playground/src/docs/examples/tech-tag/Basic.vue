@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { TechTag } from '@fzm/ui'
+import { TechTag } from '@fzm-tech-hud/ui'
 
 const tags = ref(['产线A', 'A区', '高温', '待复核'])
 </script>

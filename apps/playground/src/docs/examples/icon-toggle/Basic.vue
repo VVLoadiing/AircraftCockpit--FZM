@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { IconToggle } from '@fzm/ui'
+import { IconToggle } from '@fzm-tech-hud/ui'
 
 const mode = ref('card')
 </script>

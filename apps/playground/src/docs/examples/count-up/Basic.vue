@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { CountUp, HudButton } from '@fzm/ui'
+import { CountUp, HudButton } from '@fzm-tech-hud/ui'
 
 const value = ref(1284)
 const target = ref(2000)

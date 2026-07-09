@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TechEmpty, HudButton } from '@fzm/ui'
+import { TechEmpty, HudButton } from '@fzm-tech-hud/ui'
 </script>
 
 <template>

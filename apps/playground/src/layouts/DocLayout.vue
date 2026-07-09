@@ -15,12 +15,16 @@ import {
   useUiTheme,
   UI_STYLE_OPTIONS,
   TechSelect,
-} from '@fzm/ui'
+} from '@fzm-tech-hud/ui'
 import { categoryGroups } from '../docs/registry'
 
 const route = useRoute()
 const router = useRouter()
 
+/** 当前是否在组件库说明页 */
+const isIntro = computed(() => route.path === '/intro')
+/** 当前是否在主题系统页 */
+const isTheme = computed(() => route.path === '/theme')
 /** 当前选中的组件名（用于目录高亮） */
 const activeName = computed(() => String(route.params.name ?? ''))
 
@@ -68,6 +72,17 @@ function goHome() {
       <!-- 左侧目录 -->
       <aside class="doc-layout__sidebar">
         <nav class="doc-nav">
+          <!-- 顶部：组件库说明（使用指南） + 主题系统 -->
+          <section class="doc-nav__group">
+            <h3 class="doc-nav__group-title">开始</h3>
+            <RouterLink to="/intro" class="doc-nav__item" :class="{ 'is-active': isIntro }">
+              组件库说明
+            </RouterLink>
+            <RouterLink to="/theme" class="doc-nav__item" :class="{ 'is-active': isTheme }">
+              主题系统
+            </RouterLink>
+          </section>
+
           <section v-for="g in categoryGroups" :key="g.title" class="doc-nav__group">
             <h3 class="doc-nav__group-title">{{ g.title }}</h3>
             <RouterLink
@@ -98,7 +113,34 @@ function goHome() {
   z-index: 1;
   display: flex;
   flex-direction: column;
-  /* 文档站用深色底（区别于大屏的浅色 3D 场景底），确保白色文字清晰可读 */
+
+  /*
+   * 文档站框架固定深色，不受主题切换影响。
+   *
+   * 浅色主题（冰白系列）会把 --bg-* 变浅、--text-* 变深，
+   * 直接套用会导致文档框架「深底深字 / 浅底浅字」糊成一团看不清。
+   * 这里在文档根上把背景与文字令牌锁定为深色体系固定值，
+   * 整个文档子树（侧栏 / 内容页 / DemoBlock）统一使用这套深色，
+   * 只有主色族（--primary / --accent 等点缀色）跟随主题变化 ——
+   * 这样既能实时预览主题主色差异，又保证文字始终清晰可读。
+   */
+  --bg-body: #050709;
+  --bg-card: linear-gradient(168deg, rgba(5, 30, 54, 0.2), rgba(5, 30, 54, 0.4) 60%, rgba(5, 30, 54, 0.45));
+  --bg-card-strong: rgba(4, 24, 44, 0.94);
+  --bg-elevated: rgba(6, 30, 54, 0.97);
+  --bg-scene: #050709;
+  --bg-hover: rgb(var(--primary-rgb) / 0.18);
+
+  --text-primary: #ffffff;
+  --text-secondary: #b8d8ea;
+  --text-muted: #8aa8bc;
+  --text-on-primary: #032030;
+
+  /* 深色主题的描边 / 阴影 / 玻璃体系（浅色主题会反转，这里锁回深色） */
+  --border-color: rgb(var(--primary-rgb) / 0.36);
+  --border-light: rgb(var(--primary-rgb) / 0.22);
+  --border-strong: rgb(var(--primary-rgb) / 0.6);
+
   background:
     radial-gradient(circle at 50% 0%, rgba(8, 30, 50, 0.6), transparent 55%),
     var(--bg-body);

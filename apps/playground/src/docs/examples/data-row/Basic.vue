@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DataRow, ProgressBar } from '@fzm/ui'
+import { DataRow, ProgressBar } from '@fzm-tech-hud/ui'
 </script>
 
 <template>

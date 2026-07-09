@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FzGlass } from '@fzm/ui'
+import { FzGlass } from '@fzm-tech-hud/ui'
 </script>
 
 <template>

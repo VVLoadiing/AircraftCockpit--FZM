@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { TechSelect } from '@fzm/ui'
+import { TechSelect } from '@fzm-tech-hud/ui'
 
 const value = ref('online')
 </script>

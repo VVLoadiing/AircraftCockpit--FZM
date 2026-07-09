@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LoadingSpinner } from '@fzm/ui'
+import { LoadingSpinner } from '@fzm-tech-hud/ui'
 </script>
 
 <template>

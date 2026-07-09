@@ -12,7 +12,7 @@
  * 编辑态关闭（editing=false）时，全部控件隐藏，标题变为纯展示。
  */
 import { ref, computed } from 'vue'
-import { TechCard } from '@fzm/ui'
+import { TechCard } from '@fzm-tech-hud/ui'
 import CardRenderer from './CardRenderer.vue'
 import CardSettingsPanel from './CardSettingsPanel.vue'
 import {

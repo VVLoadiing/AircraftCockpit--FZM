@@ -14,7 +14,7 @@ import {
   TechRow,
   LevelBadge,
   ProgressBar,
-} from '@fzm/ui'
+} from '@fzm-tech-hud/ui'
 import type { ContentType } from '../../composables/useEditLayout'
 import { useChartMocks, alertList, dataRows } from '../../composables/useChartMocks'
 

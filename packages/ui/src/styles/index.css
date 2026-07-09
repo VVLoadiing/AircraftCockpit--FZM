@@ -1,6 +1,6 @@
 /**
- * @fzm/ui 样式入口
- * 使用者：import '@fzm/ui/styles'
+ * @fzm-tech-hud/ui 样式入口
+ * 使用者：import '@fzm-tech-hud/ui/styles'
  * 顺序很重要：令牌 → 主题覆盖 → 基础 → 动效
  */
 @import './tokens.css';

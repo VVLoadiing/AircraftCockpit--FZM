@@ -70,7 +70,7 @@ export interface EditLayout {
 export type Side = keyof EditLayout
 
 /**
- * TechSelect 的 options 项（@fzm/ui 未导出类型，按其内部结构定义）。
+ * TechSelect 的 options 项（@fzm-tech-hud/ui 未导出类型，按其内部结构定义）。
  * 集中定义于此，供 EditModeView / CardSettingsPanel / EditableCard 复用。
  */
 export interface SelectOption {

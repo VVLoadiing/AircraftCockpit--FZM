@@ -1,11 +1,11 @@
 /**
- * @fzm/ui —— 曜蓝机甲 Tech HUD 组件库
+ * @fzm-tech-hud/ui —— 曜蓝机甲 Tech HUD 组件库
  *
  * 使用方式：
  *  1) 全量注册：app.use(FzmUI)，然后任意模板中直接用 <TechCard /> 等
- *  2) 按需引入：import { TechCard } from '@fzm/ui'
+ *  2) 按需引入：import { TechCard } from '@fzm-tech-hud/ui'
  *
- * 样式引入：import '@fzm/ui/styles'（含设计令牌 + 主题 + 基础 + 动效 + 组件样式）
+ * 样式引入：import '@fzm-tech-hud/ui/styles'（含设计令牌 + 主题 + 基础 + 动效 + 组件样式）
  */
 import type { App, Plugin } from 'vue'
 

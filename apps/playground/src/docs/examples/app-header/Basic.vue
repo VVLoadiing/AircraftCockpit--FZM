@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AppHeader } from '@fzm/ui'
+import { AppHeader } from '@fzm-tech-hud/ui'
 </script>
 
 <template>

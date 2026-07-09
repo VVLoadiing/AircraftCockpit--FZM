@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Segmented } from '@fzm/ui'
+import { Segmented } from '@fzm-tech-hud/ui'
 
 const range = ref('day')
 </script>

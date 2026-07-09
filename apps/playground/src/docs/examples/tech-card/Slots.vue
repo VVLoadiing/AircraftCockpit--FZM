@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TechCard, CountBadge, HudButton, TechRow } from '@fzm/ui'
+import { TechCard, CountBadge, HudButton, TechRow } from '@fzm-tech-hud/ui'
 </script>
 
 <template>

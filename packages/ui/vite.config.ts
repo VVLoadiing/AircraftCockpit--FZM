@@ -26,7 +26,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'FzmUI',
-      fileName: 'fzm-ui',
+      fileName: 'fzm-tech-hud-ui',
       formats: ['es', 'umd'],
     },
     rollupOptions: {
@@ -39,7 +39,7 @@ export default defineConfig({
           echarts: 'echarts',
         },
         // 统一产物样式文件名，与 exports['./styles'] 对齐
-        assetFileNames: 'fzm-ui.[ext]',
+        assetFileNames: 'fzm-tech-hud-ui.[ext]',
       },
     },
   },

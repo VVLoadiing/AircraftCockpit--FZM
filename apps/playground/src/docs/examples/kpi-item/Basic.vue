@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { KpiItem } from '@fzm/ui'
+import { KpiItem } from '@fzm-tech-hud/ui'
 </script>
 
 <template>

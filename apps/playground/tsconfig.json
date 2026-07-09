@@ -4,8 +4,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@fzm/ui": ["../../packages/ui/src/index.ts"],
-      "@fzm/ui/styles": ["../../packages/ui/src/styles/index.css"]
+      "@fzm-tech-hud/ui": ["../../packages/ui/src/index.ts"],
+      "@fzm-tech-hud/ui/styles": ["../../packages/ui/src/styles/index.css"]
     },
     "types": ["vite/client"]
   },

@@ -17,7 +17,7 @@ importers:
 
   apps/playground:
     dependencies:
-      '@fzm/ui':
+      '@fzm-tech-hud/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       echarts:

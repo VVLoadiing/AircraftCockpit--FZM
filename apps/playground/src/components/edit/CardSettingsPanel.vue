@@ -12,7 +12,7 @@
  * 字段即时双向同步到父级（@update-* 事件），父级再写回 layout。
  */
 import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
-import { FzGlass, FzGlassTitle, FzGlassClose, TechInput, TechSelect, HudButton } from '@fzm/ui'
+import { FzGlass, FzGlassTitle, FzGlassClose, TechInput, TechSelect, HudButton } from '@fzm-tech-hud/ui'
 import {
   CONTENT_TYPES,
   type EditableCard,

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TechCard, DataRow } from '@fzm/ui'
+import { TechCard, DataRow } from '@fzm-tech-hud/ui'
 </script>
 
 <template>

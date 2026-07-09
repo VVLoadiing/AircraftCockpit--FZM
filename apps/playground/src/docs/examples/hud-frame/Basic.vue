@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { HudFrame } from '@fzm/ui'
+import { HudFrame } from '@fzm-tech-hud/ui'
 </script>
 
 <template>

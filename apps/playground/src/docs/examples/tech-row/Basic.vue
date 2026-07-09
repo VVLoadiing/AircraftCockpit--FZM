@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TechRow, LevelBadge } from '@fzm/ui'
+import { TechRow, LevelBadge } from '@fzm-tech-hud/ui'
 
 const alerts = [
   { level: 'high' as const, text: '3#注塑机 温度超限 92℃', time: '12:04:21' },

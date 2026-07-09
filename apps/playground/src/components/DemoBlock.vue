@@ -4,7 +4,7 @@
  *
  * 上方渲染示例组件的真实效果（通过默认插槽传入），
  * 下方默认展开源码（语法高亮 + 一键复制），方便直接取用。
- * 与 @fzm/ui 设计风格统一：切角、深色、主题色高亮。
+ * 与 @fzm-tech-hud/ui 设计风格统一：切角、深色、主题色高亮。
  */
 import { ref, computed } from 'vue'
 import hljs from 'highlight.js/lib/core'
@@ -48,8 +48,8 @@ async function copyCode() {
   <section class="demo">
     <header v-if="title" class="demo__title">{{ title }}</header>
 
-    <!-- 实时预览区 -->
-    <div class="demo__preview">
+    <!-- 实时预览区（仅当传入插槽内容时渲染；纯代码示例不显示预览） -->
+    <div v-if="$slots.default" class="demo__preview">
       <slot />
     </div>
 

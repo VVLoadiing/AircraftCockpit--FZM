@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { TechInput } from '@fzm/ui'
+import { TechInput } from '@fzm-tech-hud/ui'
 
 const value = ref('FX-3200')
 </script>

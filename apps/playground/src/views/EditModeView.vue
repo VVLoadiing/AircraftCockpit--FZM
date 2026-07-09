@@ -11,7 +11,7 @@
  * 布局自动持久化到 localStorage（见 useEditLayout）。
  */
 import { ref } from 'vue'
-import { Sidebar, TechSelect, TechInput, HudButton, TechEmpty } from '@fzm/ui'
+import { Sidebar, TechSelect, TechInput, HudButton, TechEmpty } from '@fzm-tech-hud/ui'
 import EditableCard from '../components/edit/EditableCard.vue'
 import {
   useEditLayout,

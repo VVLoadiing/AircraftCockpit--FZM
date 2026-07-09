@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { TechTabs } from '@fzm/ui'
+import { TechTabs } from '@fzm-tech-hud/ui'
 
 const tab = ref('overview')
 </script>

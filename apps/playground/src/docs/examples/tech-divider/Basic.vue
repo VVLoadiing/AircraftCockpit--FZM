@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TechDivider } from '@fzm/ui'
+import { TechDivider } from '@fzm-tech-hud/ui'
 </script>
 
 <template>

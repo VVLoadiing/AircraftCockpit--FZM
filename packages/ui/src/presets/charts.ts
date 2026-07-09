@@ -12,7 +12,7 @@
  *   - dashed 虚线网格 + 极细轴线 → 仪表界面
  *
  * @example
- * import { useChartPalette, buildLineChart } from '@fzm/ui'
+ * import { useChartPalette, buildLineChart } from '@fzm-tech-hud/ui'
  * const { palette } = useChartPalette()
  * const option = buildLineChart({
  *   palette: palette.value,

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { GlassPanel } from '@fzm/ui'
+import { GlassPanel } from '@fzm-tech-hud/ui'
 </script>
 
 <template>
