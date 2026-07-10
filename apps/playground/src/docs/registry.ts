@@ -55,6 +55,12 @@ export const componentDocs: ComponentDocEntry[] = [
   { name: 'icon-toggle', title: 'IconToggle 图标按钮组', category: '输入与导航', loader: () => import('./components/icon-toggle.doc') },
   { name: 'tech-tabs', title: 'TechTabs 标签页', category: '输入与导航', loader: () => import('./components/tech-tabs.doc') },
   { name: 'segmented', title: 'Segmented 分段控制器', category: '输入与导航', loader: () => import('./components/segmented.doc') },
+  { name: 'tech-checkbox', title: 'Checkbox / Radio 复选与单选', category: '输入与导航', loader: () => import('./components/tech-checkbox.doc') },
+  { name: 'tech-textarea', title: 'TechTextarea 多行输入', category: '输入与导航', loader: () => import('./components/tech-textarea.doc') },
+  { name: 'tech-slider', title: 'TechSlider 滑块', category: '输入与导航', loader: () => import('./components/tech-slider.doc') },
+  { name: 'tech-rate', title: 'TechRate 评分', category: '输入与导航', loader: () => import('./components/tech-rate.doc') },
+  { name: 'tech-form', title: 'Form 表单', category: '输入与导航', loader: () => import('./components/tech-form.doc') },
+  { name: 'tech-upload', title: 'TechUpload 上传', category: '输入与导航', loader: () => import('./components/tech-upload.doc') },
   // 布局
   { name: 'app-header', title: 'AppHeader 应用头部', category: '布局', loader: () => import('./components/app-header.doc') },
   { name: 'hud-frame', title: 'HudFrame HUD 边框', category: '布局', loader: () => import('./components/hud-frame.doc') },

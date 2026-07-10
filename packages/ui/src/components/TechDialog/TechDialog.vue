@@ -184,7 +184,7 @@ onBeforeUnmount(() => {
   -webkit-backdrop-filter: blur(4px);
 }
 
-/* —— 对话框面板（复用 FzGlass 的黑色玻璃视觉） —— */
+/* —— 对话框面板（与 Message / Popconfirm 统一的实底切角风格） —— */
 .fzm-dialog__panel {
   position: relative;
   max-width: calc(100vw - 48px);
@@ -192,15 +192,23 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border-radius: var(--glass-radius);
+  border-radius: var(--radius-md);
   color: var(--text-primary);
-  background: var(--glass-bg);
-  border: var(--glass-border);
-  backdrop-filter: var(--glass-blur-strong);
-  -webkit-backdrop-filter: var(--glass-blur-strong);
+  /* 跟随主题实底卡片，文字始终高对比清晰 */
+  background: var(--bg-card-strong);
+  border: 1px solid rgb(var(--primary-rgb) / 0.38);
   box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.6),
-    var(--glass-shadow);
+    0 24px 60px rgba(0, 0, 0, 0.45),
+    0 0 24px rgb(var(--primary-rgb) / 0.16);
+  /* 切角呼应科技风（与 Message / Popconfirm 一致） */
+  clip-path: polygon(
+    var(--notch) 0,
+    100% 0,
+    100% calc(100% - var(--notch)),
+    calc(100% - var(--notch)) 100%,
+    0 100%,
+    0 var(--notch)
+  );
 }
 
 /* 顶部 1px 扫光高光（机甲仪表感） */

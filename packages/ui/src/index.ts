@@ -34,6 +34,17 @@ import TechInput from './components/TechInput'
 import TechSelect from './components/TechSelect'
 import TechSwitch from './components/TechSwitch'
 import IconToggle from './components/IconToggle'
+import TechCheckbox from './components/TechCheckbox'
+import TechCheckboxGroup from './components/TechCheckboxGroup'
+import TechRadio from './components/TechRadio'
+import TechRadioGroup from './components/TechRadioGroup'
+import TechTextarea from './components/TechTextarea'
+import TechSlider from './components/TechSlider'
+import TechRate from './components/TechRate'
+// 表单
+import TechForm from './components/TechForm'
+import TechFormItem from './components/TechFormItem'
+import TechUpload from './components/TechUpload'
 // 导航
 import TechTabs from './components/TechTabs'
 import Segmented from './components/Segmented'
@@ -65,6 +76,8 @@ export {
 // —— 消息提示命令式 API ——
 export { Message, useMessage } from './components/TechMessage'
 export type { MessageOptions } from './components/TechMessage'
+export type { FormRule, FormRules } from './components/TechForm'
+export type { UploadFile } from './components/TechUpload'
 
 // —— 机甲风图表预设 ——
 export { buildLineChart, buildBarChart, buildPieChart } from './presets/charts'
@@ -106,6 +119,17 @@ export {
   TechSelect,
   TechSwitch,
   IconToggle,
+  TechCheckbox,
+  TechCheckboxGroup,
+  TechRadio,
+  TechRadioGroup,
+  TechTextarea,
+  TechSlider,
+  TechRate,
+  // 表单
+  TechForm,
+  TechFormItem,
+  TechUpload,
   // 导航
   TechTabs,
   Segmented,
@@ -152,6 +176,17 @@ const components = {
   TechSelect,
   TechSwitch,
   IconToggle,
+  TechCheckbox,
+  TechCheckboxGroup,
+  TechRadio,
+  TechRadioGroup,
+  TechTextarea,
+  TechSlider,
+  TechRate,
+  // 表单
+  TechForm,
+  TechFormItem,
+  TechUpload,
   // 导航
   TechTabs,
   Segmented,

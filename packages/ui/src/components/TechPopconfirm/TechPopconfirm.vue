@@ -199,8 +199,8 @@ onBeforeUnmount(() => {
   border: 1px solid rgb(var(--primary-rgb) / 0.38);
   border-radius: var(--radius-md);
   box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.28),
-    0 0 16px rgb(var(--primary-rgb) / 0.14);
+    0 12px 32px rgba(0, 0, 0, 0.32),
+    0 0 16px rgb(var(--primary-rgb) / 0.16);
   /* 切角呼应科技风 */
   clip-path: polygon(
     var(--notch) 0,
