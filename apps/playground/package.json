@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@fzm-tech-hud/ui": "workspace:*",
+    "ali-oss": "^6.23.0",
     "echarts": "^5.5.1",
     "vue": "^3.5.13",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
+    "@types/ali-oss": "^6.23.3",
     "@vitejs/plugin-vue": "^5.1.4",
     "highlight.js": "^11.10.0",
     "typescript": "^5.6.3",

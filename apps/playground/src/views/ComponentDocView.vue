@@ -6,7 +6,7 @@
  * 渲染：标题 / 简介 / 多个示例（DemoBlock：预览 + 源码）/ Props·Slots·Events 表格。
  * 未找到时显示 TechEmpty + 返回总览。
  */
-import { ref, watch, computed } from 'vue'
+import { ref, shallowRef, watch, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import DemoBlock from '../components/DemoBlock.vue'
 import { findEntry } from '../docs/registry'
@@ -16,7 +16,12 @@ import type { ComponentDoc } from '../docs/types'
 const route = useRoute()
 const router = useRouter()
 
-const doc = ref<ComponentDoc | null>(null)
+/**
+ * doc 用 shallowRef 而非 ref：doc 内 demos[].component 是 Vue 组件对象，
+ * ref 会对其做深度响应式代理（触发 "made a reactive object" 警告 + 性能损耗）。
+ * shallowRef 只追踪 .value 的替换，组件对象保持原样，符合官方对存组件的推荐。
+ */
+const doc = shallowRef<ComponentDoc | null>(null)
 const loading = ref(false)
 const notFound = ref(false)
 

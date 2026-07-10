@@ -1,6 +1,8 @@
 import type { ComponentDoc } from '../types'
 import Basic from '../examples/tech-upload/Basic.vue'
 import BasicSource from '../examples/tech-upload/Basic.vue?raw'
+import Service from '../examples/tech-upload/Service.vue'
+import ServiceSource from '../examples/tech-upload/Service.vue?raw'
 
 export default {
   name: 'tech-upload',
@@ -12,8 +14,12 @@ export default {
     '只负责选文件，不发送请求：选中后 emit change/select 把 File 交给业务自行处理上传（如调 SDK、分片）。',
     '支持 v-model 双向绑定文件数组；accept 类型过滤、multiple 多选、maxSize 单文件大小限制、limit 数量限制。',
     '内置校验：超大小/超数量/类型不符时 emit error，可用 Message 提示用户。',
+    '下方「配合 upload service」示例演示如何与 services/upload 集成：选文件后调用统一的 upload()，支持 OSS 直传 / 服务器中转两种通道（mock 模式可跑通完整流程），实时进度与结果 URL。',
   ],
-  demos: [{ title: '三种模式（拖拽 / 按钮 / 图片）', component: Basic, source: BasicSource }],
+  demos: [
+    { title: '三种模式（拖拽 / 按钮 / 图片）', component: Basic, source: BasicSource },
+    { title: '配合 upload service（OSS 直传 / 服务器中转）', component: Service, source: ServiceSource },
+  ],
   props: [
     { name: 'modelValue', type: 'UploadFile[]', default: '[]', desc: 'v-model 绑定值（已选文件数组）' },
     { name: 'type', type: "'drag' | 'button' | 'image'", default: "'drag'", desc: '展示模式' },
