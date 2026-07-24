@@ -124,7 +124,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
         <label class="settings-panel__field">
           <span class="settings-panel__label">
             宽度
-            <small class="settings-panel__hint">留空 = 跟随侧栏</small>
+            <small class="settings-panel__hint">留空 = 自动 320px</small>
           </span>
           <TechInput
             v-model="widthDraft"
@@ -140,7 +140,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
         <label class="settings-panel__field">
           <span class="settings-panel__label">
             高度
-            <small class="settings-panel__hint">留空 = fill 均分</small>
+            <small class="settings-panel__hint">留空 = 自动 200px</small>
           </span>
           <TechInput
             v-model="heightDraft"
@@ -157,7 +157,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
           当前：
           <span>{{ card.width ? card.width : '自动宽度' }}</span>
           <span class="settings-panel__dot">×</span>
-          <span>{{ card.height ? card.height : 'fill 均分' }}</span>
+          <span>{{ card.height ? card.height : '自动高度' }}</span>
         </div>
       </div>
 

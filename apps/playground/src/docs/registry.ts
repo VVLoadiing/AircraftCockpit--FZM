@@ -61,6 +61,7 @@ export const componentDocs: ComponentDocEntry[] = [
   { name: 'tech-rate', title: 'TechRate 评分', category: '输入与导航', loader: () => import('./components/tech-rate.doc') },
   { name: 'tech-form', title: 'Form 表单', category: '输入与导航', loader: () => import('./components/tech-form.doc') },
   { name: 'tech-upload', title: 'TechUpload 上传', category: '输入与导航', loader: () => import('./components/tech-upload.doc') },
+  { name: 'use-draggable', title: 'useDraggable 拖动', category: '输入与导航', loader: () => import('./components/use-draggable.doc') },
   // 布局
   { name: 'app-header', title: 'AppHeader 应用头部', category: '布局', loader: () => import('./components/app-header.doc') },
   { name: 'hud-frame', title: 'HudFrame HUD 边框', category: '布局', loader: () => import('./components/hud-frame.doc') },

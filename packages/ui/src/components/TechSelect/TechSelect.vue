@@ -38,6 +38,19 @@ const emit = defineEmits<{
 
 const open = ref(false)
 const rootRef = ref<HTMLElement | null>(null)
+/** 浮层朝向：默认向下，触发器靠近视口底部时翻向上，避免被裁切 */
+const placement = ref<'bottom' | 'top'>('bottom')
+
+/** 估算浮层所需高度（与 CSS max-height:220px 对齐，每项约 31px） */
+function computePlacement() {
+  const trigger = rootRef.value?.querySelector<HTMLElement>('.fzm-select__trigger')
+  if (!trigger) return
+  const rect = trigger.getBoundingClientRect()
+  const spaceBelow = window.innerHeight - rect.bottom
+  const spaceAbove = rect.top
+  const need = Math.min(220, props.options.length * 31 + 8) + 8
+  placement.value = spaceBelow < need && spaceAbove > spaceBelow ? 'top' : 'bottom'
+}
 
 const selectedLabel = computed(() => {
   const hit = props.options.find((o) => o.value === props.modelValue)
@@ -51,6 +64,7 @@ const selectedOption = computed(() => {
 
 function toggle() {
   if (props.disabled) return
+  if (!open.value) computePlacement()
   open.value = !open.value
 }
 
@@ -92,7 +106,7 @@ watch(open, (v) => {
 </script>
 
 <template>
-  <div ref="rootRef" class="fzm-select" :class="{ 'is-disabled': disabled, 'is-open': open }">
+  <div ref="rootRef" class="fzm-select" :class="{ 'is-disabled': disabled, 'is-open': open, 'is-top': placement === 'top' }">
     <!-- 触发器：支持 #trigger 插槽自定义显示（如带彩色圆点） -->
     <button type="button" class="fzm-select__trigger" :disabled="disabled" @click="toggle">
       <slot name="trigger" :option="selectedOption" :label="selectedLabel">
@@ -248,6 +262,12 @@ watch(open, (v) => {
     0 0 16px rgb(var(--primary-rgb) / 0.18);
 }
 
+/* 触发器贴近视口底部时，浮层向上展开 */
+.fzm-select.is-top .fzm-select__dropdown {
+  top: auto;
+  bottom: calc(100% + 6px);
+}
+
 .fzm-select__option {
   display: flex;
   align-items: center;
@@ -299,5 +319,11 @@ watch(open, (v) => {
 .fzm-select-fade-leave-to {
   opacity: 0;
   transform: translateY(-4px);
+}
+
+/* 向上展开时，过渡方向也反过来 */
+.fzm-select.is-top .fzm-select-fade-enter-from,
+.fzm-select.is-top .fzm-select-fade-leave-to {
+  transform: translateY(4px);
 }
 </style>

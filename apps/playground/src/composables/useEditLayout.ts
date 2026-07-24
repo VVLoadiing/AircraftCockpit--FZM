@@ -55,9 +55,16 @@ export interface EditableCard {
   width?: string
   /**
    * 卡片高度（CSS 长度字符串，如 '200px'）。
-   * 空字符串 / 未设置 = fill 模式（在侧栏 flex 列里均分高度）。
+   * 自由画布模式下卡片必须有显式高度，否则 absolute 定位会塌陷。
    */
   height?: string
+  /**
+   * 自由位置（px，相对 .edit-mode 画布左上角）。
+   * 逻辑必填：新增卡片自动算初始位置（画布中部错开）；
+   * 旧数据无 x/y 时由 loadLayout 补默认值。左键拖动后实时更新。
+   */
+  x?: number
+  y?: number
 }
 
 /** 编辑布局（左右两侧） */
@@ -89,19 +96,47 @@ function uid(): string {
   return `card_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`
 }
 
-/** 默认布局（参考现有 DashboardView 的拼装思路） */
-function defaultLayout(): EditLayout {
+/** 默认卡片尺寸（自由画布模式必须显式） */
+const DEFAULT_W = 320
+const DEFAULT_H = 200
+
+/**
+ * 计算新增卡片在画布上的初始位置：画布中部 + 按已有数量错开，避免完全重叠。
+ * 画布尺寸取视口（无 window 时给保守默认），每张偏移 30px。
+ */
+function calcInitialPosition(existingCount: number): { x: number; y: number } {
+  const vw = typeof window !== 'undefined' ? window.innerWidth : 1440
+  const vh = typeof window !== 'undefined' ? window.innerHeight : 900
+  const offset = existingCount * 30
   return {
-    left: [
-      { id: uid(), title: '实时产线趋势', contentType: 'line' },
-      { id: uid(), title: '设备状态分布', contentType: 'pie' },
-    ],
-    right: [
-      { id: uid(), title: '告警列表', contentType: 'tech-row' },
-      { id: uid(), title: '核心指标', contentType: 'metric' },
-      { id: uid(), title: '产能统计', contentType: 'bar' },
-    ],
+    x: Math.round((vw - DEFAULT_W) / 2 + offset),
+    y: Math.round((vh - DEFAULT_H) / 2 + offset),
   }
+}
+
+/** 默认布局（参考现有 DashboardView 的拼装思路，自由画布定位） */
+function defaultLayout(): EditLayout {
+  const cards = [
+    { title: '实时产线趋势', contentType: 'line' as ContentType },
+    { title: '设备状态分布', contentType: 'pie' as ContentType },
+    { title: '告警列表', contentType: 'tech-row' as ContentType },
+    { title: '核心指标', contentType: 'metric' as ContentType },
+    { title: '产能统计', contentType: 'bar' as ContentType },
+  ]
+  // 全部归到 left（渲染层展平，side 不影响位置）
+  const left = cards.map((c, i) => {
+    const pos = calcInitialPosition(i)
+    return {
+      id: uid(),
+      title: c.title,
+      contentType: c.contentType,
+      width: `${DEFAULT_W}px`,
+      height: `${DEFAULT_H}px`,
+      x: pos.x,
+      y: pos.y,
+    }
+  })
+  return { left, right: [] }
 }
 
 /** 读取持久化布局（解析失败 / 缺字段 → 回退默认） */
@@ -113,12 +148,26 @@ function loadLayout(): EditLayout {
     if (!parsed || !Array.isArray(parsed.left) || !Array.isArray(parsed.right)) {
       return defaultLayout()
     }
-    // 过滤掉字段不全的脏数据
+    // 过滤掉字段不全的脏数据；无 x/y 的旧数据补默认位置（向后兼容）
+    let counter = 0
     const clean = (arr: unknown[]): EditableCard[] =>
-      arr.filter(
-        (c): c is EditableCard =>
-          !!c && typeof c === 'object' && 'id' in c && 'title' in c && 'contentType' in c,
-      )
+      arr
+        .filter(
+          (c): c is Record<string, unknown> =>
+            !!c && typeof c === 'object' && 'id' in c && 'title' in c && 'contentType' in c,
+        )
+        .map((c) => {
+          const card = c as unknown as EditableCard
+          if (card.x === undefined || card.y === undefined) {
+            const pos = calcInitialPosition(counter)
+            card.x = pos.x
+            card.y = pos.y
+            if (!card.width) card.width = `${DEFAULT_W}px`
+            if (!card.height) card.height = `${DEFAULT_H}px`
+          }
+          counter++
+          return card
+        })
     return { left: clean(parsed.left), right: clean(parsed.right) }
   } catch {
     return defaultLayout()
@@ -145,13 +194,19 @@ if (typeof window !== 'undefined') {
   )
 }
 
-/** 末尾追加一张卡片 */
+/** 末尾追加一张卡片（初始位置 = 画布中部 + 已有数量错开） */
 function addCard(side: Side, contentType: ContentType, title?: string) {
   const meta = getContentTypeMeta(contentType)
+  const existing = layout.value.left.length + layout.value.right.length
+  const pos = calcInitialPosition(existing)
   layout.value[side].push({
     id: uid(),
     title: title?.trim() || meta.label,
     contentType,
+    width: `${DEFAULT_W}px`,
+    height: `${DEFAULT_H}px`,
+    x: pos.x,
+    y: pos.y,
   })
 }
 
@@ -203,6 +258,18 @@ function resetLayout() {
   layout.value = defaultLayout()
 }
 
+/**
+ * 更新卡片自由位置（左键拖动结束时调用）。
+ * 写入 x/y 后卡片即转为自由定位；持久化由 watch deep 自动完成。
+ */
+function updatePosition(side: Side, id: string, x: number, y: number) {
+  const card = layout.value[side].find((c) => c.id === id)
+  if (card) {
+    card.x = Math.round(x)
+    card.y = Math.round(y)
+  }
+}
+
 export function useEditLayout() {
   return {
     layout,
@@ -212,6 +279,7 @@ export function useEditLayout() {
     updateTitle,
     updateContentType,
     updateSize,
+    updatePosition,
     resetLayout,
   }
 }

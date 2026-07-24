@@ -72,6 +72,8 @@ export {
   chartTooltip,
   withAlpha,
 } from './composables/useChartPalette'
+export { useDraggable } from './composables/useDraggable'
+export type { UseDraggableOptions, DragPosition, DragBounds } from './composables/useDraggable'
 
 // —— 消息提示命令式 API ——
 export { Message, useMessage } from './components/TechMessage'
